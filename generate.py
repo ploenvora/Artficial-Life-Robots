@@ -17,13 +17,13 @@ def Generate_Body():
     # should be stored. This world will currently be called box, because it will only contain a box.
     pyrosim.Start_SDF("world.sdf")
     
-    pyrosim.Send_Cube(name="Box", pos=[x + 10,y + 10,z] , size=[width, length, height])
-    #pyrosim.Send_Cube(name="Box2", pos=[x2,y2,z2] , size=[width, length, height])
+    pyrosim.Send_Cube(name="Box", pos=[x + 5,y + 5,z] , size=[width, length, height])
 
     #Tells pyrosim to close the sdf file.
     pyrosim.End()
 
     pyrosim.Start_URDF("body.urdf")
+    #pyrosim.Send_Cube(name="Box", pos=[x + 5,y + 5,z] , size=[width, length, height])
     # torso
     pyrosim.Send_Cube(name="Torso", pos=[1.5,0,1.5] , size=[width, length, height])
     pyrosim.Send_Joint(name = "Torso_BackLeg" , parent= "Torso" , child = "BackLeg" , type = "revolute", position = [1,0,1])
@@ -35,11 +35,6 @@ def Generate_Body():
     pyrosim.End()
 
 def Generate_Brain():
-    #Tells pyrosim the name of the file where information about the world you're about to create 
-    # should be stored. This world will currently be called box, because it will only contain a box.
-    pyrosim.Start_SDF("world.sdf")
-    #Tells pyrosim to close the sdf file.
-    pyrosim.End()
 
     pyrosim.Start_NeuralNetwork("brain.nndf")
     pyrosim.Send_Sensor_Neuron(name = 0 , linkName = "Torso")
@@ -47,6 +42,12 @@ def Generate_Brain():
     pyrosim.Send_Sensor_Neuron(name = 2 , linkName = "FrontLeg")
     pyrosim.Send_Motor_Neuron(name = 3 , jointName = "Torso_BackLeg")
     pyrosim.Send_Motor_Neuron(name = 4 , jointName = "Torso_FrontLeg")
+
+    pyrosim.Send_Synapse(sourceNeuronName = 0 , targetNeuronName = 3 , weight = -5.0)
+    pyrosim.Send_Synapse(sourceNeuronName = 1 , targetNeuronName = 3 , weight = -5.0)
+    pyrosim.Send_Synapse(sourceNeuronName = 0, targetNeuronName = 4, weight = -5.0)
+    pyrosim.Send_Synapse(sourceNeuronName = 1, targetNeuronName =  4, weight = -5.0)
+
     pyrosim.End()
 
 Generate_Body()
