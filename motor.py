@@ -9,7 +9,7 @@ import constants as c
 class MOTOR:
     def __init__(self, jointName):
         self.jointName = jointName
-        print(self.jointName)
+        #print(self.jointName)
 
     def Set_Values(self, desiredAngle, robot):
         pyrosim.Set_Motor_For_Joint(

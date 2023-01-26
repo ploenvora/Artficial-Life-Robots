@@ -9,9 +9,6 @@ length = 1
 x = 0
 y = 0
 z = 0.5
-x2 = 1
-y2 = 0
-z2 = 1.5
 
 def Generate_Body():
     #Tells pyrosim the name of the file where information about the world you're about to create 

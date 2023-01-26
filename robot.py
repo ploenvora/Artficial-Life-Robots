@@ -32,7 +32,7 @@ class ROBOT:
         self.motors = {}
         for jointName in pyrosim.jointNamesToIndices:
             self.motors[jointName] = MOTOR(jointName)
-        print(self.motors)
+        #print(self.motors)
 
     def Act(self, t):
         for neuronName in self.nn.Get_Neuron_Names():
@@ -43,8 +43,15 @@ class ROBOT:
 
     def Think(self):
         self.nn.Update()
-        self.nn.Print()
+        #self.nn.Print()
 
+    def Get_Fitness(self):
+        stateOfLinkZero = p.getLinkState(self.robot,0)
+        positionOfLinkZero = stateOfLinkZero[0]
+        xCoordinateOfLinkZero = positionOfLinkZero[0]
+        with open("fitness.txt", "w") as file:
+            file.write(str(xCoordinateOfLinkZero))
+        file.close()
             
 
 
