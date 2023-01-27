@@ -2,6 +2,7 @@ import numpy
 import pyrosim.pyrosim as pyrosim
 import os
 import random as random
+import time
 
 height = 1
 width = 1
@@ -11,18 +12,40 @@ y = 0
 z = 0.5
 
 class SOLUTION:
-    def __init__(self):
+    def __init__(self, ID):
         self.weights = (numpy.random.rand(3, 2) * 2) - 1
+        self.myID = ID
 
-    def Evaluate(self, str):
+    def Evaluate(self, directOrGUI):
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
-        os.system(f"python3.9 simulate.py {str}")
-        with open("fitness.txt", "r") as file:
+        #os.system("python3 simulate.py " + directOrGUI)
+        os.system(f"python3.9 simulate.py {directOrGUI} {str(self.myID)} &")
+        while not os.path.exists(f"fitness{str(self.myID)}.txt"):
+            time.sleep(0.01)
+        with open(f"fitness{str(self.myID)}.txt", "r") as file:
             fitnessFile = file.read()
         file.close()
         self.fitness = float(fitnessFile)
+        print(self.fitness)
+    
+    def Start_Simulation(self, directOrGUI):
+        self.Create_World()
+        self.Create_Body()
+        self.Create_Brain()
+        #os.system("python3 simulate.py " + directOrGUI)
+        os.system(f"python3.9 simulate.py {directOrGUI} {str(self.myID)} &")
+    
+    def Wait_For_Simulation_To_End(self, directOrGUI):
+        while not os.path.exists(f"fitness{str(self.myID)}.txt"):
+            time.sleep(0.01)
+        with open(f"fitness{str(self.myID)}.txt", "r") as file:
+            fitnessFile = file.read()
+        file.close()
+        self.fitness = float(fitnessFile)
+        #print(self.fitness)
+        os.system(f"rm fitness{str(self.myID)}.txt")
 
     def Create_World(self):
         #Tells pyrosim the name of the file where information about the world you're about to create 
@@ -48,7 +71,7 @@ class SOLUTION:
         pyrosim.End()
 
     def Create_Brain(self):
-        pyrosim.Start_NeuralNetwork("brain.nndf")
+        pyrosim.Start_NeuralNetwork(f"brain{self.myID}.nndf")
         pyrosim.Send_Sensor_Neuron(name = 0 , linkName = "Torso")
         pyrosim.Send_Sensor_Neuron(name = 1 , linkName = "BackLeg")
         pyrosim.Send_Sensor_Neuron(name = 2 , linkName = "FrontLeg")
@@ -70,3 +93,6 @@ class SOLUTION:
         randomRow = random.randint(0, len(self.weights) - 1)
         randomColumn = random.randint(0, len(self.weights[0]) - 1)
         self.weights[randomRow, randomColumn] = random.random() * 2 - 1
+
+    def Set_ID(self, ID):
+        self.myID = ID

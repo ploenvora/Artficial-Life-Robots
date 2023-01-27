@@ -10,7 +10,7 @@ from world import WORLD
 from robot import ROBOT
 
 class SIMULATION:
-    def __init__(self, directOrGUI):
+    def __init__(self, directOrGUI, solutionID):
 
         if directOrGUI == "DIRECT":
             self.physicsClient = p.connect(p.DIRECT)
@@ -22,9 +22,9 @@ class SIMULATION:
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
         #Set gravity
         p.setGravity(0,0,-9.8)
-
+        self.myID = solutionID
         self.world = WORLD()
-        self.robot = ROBOT()
+        self.robot = ROBOT(self.myID)
     
     def Run(self):
         for i in range(1000):
@@ -40,4 +40,4 @@ class SIMULATION:
         p.disconnect()
 
     def Get_Fitness(self):
-        self.robot.Get_Fitness()
+        self.robot.Get_Fitness(self.myID)

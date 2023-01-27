@@ -24,5 +24,6 @@ motorCommandFront = amplitudeFront * numpy.sin(frequencyFront * numpy.arange(100
 
 
 numberOfGenerations  = 10
+populationSize = 10
 
 
