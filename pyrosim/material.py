@@ -2,11 +2,12 @@ from pyrosim.commonFunctions import Save_Whitespace
 
 class MATERIAL: 
 
-    def __init__(self, colorString):
+    def __init__(self, colorString, materialName):
 
         self.depth  = 3
 
-        self.string1 = '<material name="Cyan">'
+        self.string1 = materialName
+        #'<material name="Cyan">'
 
         self.string2 = colorString
 

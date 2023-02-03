@@ -15,6 +15,7 @@ import os
 class ROBOT:
     def __init__(self, solutionID):
         #Adding a robot
+        self.world = WORLD()
         self.robot = p.loadURDF("body.urdf")
         pyrosim.Prepare_To_Simulate(self.robot)
         self.Prepare_To_Sense()
@@ -57,8 +58,7 @@ class ROBOT:
         # stateOfLinkZero = p.getLinkState(self.robot,0)
         # positionOfLinkZero = stateOfLinkZero[0]
         # xCoordinateOfLinkZero = positionOfLinkZero[0]
-        myWorld = WORLD()
-        positions = myWorld.getPositions()
+        positions = self.world.getPositions()
         zPinPositionSum = sum([tuple[2] for tuple in positions[1:]])
         # basePositionAndOrientation = p.getBasePositionAndOrientation(self.robot)
         # basePosition = basePositionAndOrientation[0]
@@ -77,8 +77,3 @@ class ROBOT:
             file.write(str(zPinPositionSum))
         file.close()
         os.system(f"mv 'tmp{myID}.txt' 'fitness{myID}.txt'")            
-
-
-
-
-

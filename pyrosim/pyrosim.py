@@ -106,7 +106,7 @@ def Prepare_To_Simulate(bodyID):
 
     Prepare_Joint_Dictionary(bodyID)
 
-def Send_Link(name,pos,size,objectType, colorString):
+def Send_Link(name,pos,size,objectType, colorString, materialName, mass):
 
     global availableLinkIndex
 
@@ -120,7 +120,7 @@ def Send_Link(name,pos,size,objectType, colorString):
 
         links.append(link)
     else:
-        link = LINK_URDF(name,pos,size, colorString)
+        link = LINK_URDF(name,pos,size, colorString, materialName, mass)
 
         links.append(link)
 
@@ -134,11 +134,11 @@ def Send_Link(name,pos,size,objectType, colorString):
 
     availableLinkIndex = availableLinkIndex + 1
 
-def Send_Cube(name="default",pos=[0,0,0],size=[1,1,1],colorString='<color rgba="0.537 0.886 0.615 1.0"/>'):
-    Send_Link(name,pos,size,"box",colorString)
+def Send_Cube(name="default",pos=[0,0,0],size=[1,1,1],colorString='<color rgba="0.670 0.553 0.4 1.0"/>', materialName='<material name="White">', mass = 1.0):
+    Send_Link(name,pos,size,"box",colorString, materialName, mass)
 
-def Send_Sphere(name="default",pos=[0,0,0],size=[0.5],colorString='<color rgba="0.3 0.3 0.4 1.0"/>'):
-    Send_Link(name,pos,size,"sphere",colorString)
+def Send_Sphere(name="default",pos=[0,0,0],size=[0.5],colorString='<color rgba="0.3 0.3 0.4 1.0"/>', materialName='<material name="Cyan">', mass = 1.0):
+    Send_Link(name,pos,size,"sphere",colorString, materialName, mass)
 
 
 def Send_Joint(name,parent,child,type,position, jointAxis):

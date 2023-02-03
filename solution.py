@@ -11,8 +11,8 @@ length = 1
 x = 0
 y = 0
 z = 0.5
-start_x = 6
-start_y = 0 
+start_x = 5
+start_y = 1 
 start_z = 0.5
 pin_length = 0.2
 pin_width = 0.2
@@ -45,22 +45,22 @@ class SOLUTION:
         # should be stored. This world will currently be called box, because it will only contain a box.
         pyrosim.Start_SDF("world.sdf")
 
-        pyrosim.Send_Sphere(name="BowlingBall" , pos=[2, 0, 0.4] , size=[0.4])
+        pyrosim.Send_Sphere(name="BowlingBall" , pos=[2, 1.25, 0.4] , size=[0.4])
 
         #row 1
         pyrosim.Send_Cube(name="Pin1Base", pos=[start_x, start_y, start_z] , size = [pin_length, pin_width, pin_height])
         #row 2
-        pyrosim.Send_Cube(name="Pin2Base", pos=[start_x + 0.5, start_y + 0.5, start_z] , size = [pin_length, pin_width, pin_height])
-        pyrosim.Send_Cube(name="Pin3Base", pos=[start_x + 0.5, start_y - 0.5, start_z] , size = [pin_length, pin_width, pin_height])
+        pyrosim.Send_Cube(name="Pin2Base", pos=[start_x + 0.35, start_y + 0.35, start_z] , size = [pin_length, pin_width, pin_height])
+        pyrosim.Send_Cube(name="Pin3Base", pos=[start_x + 0.35, start_y - 0.35, start_z] , size = [pin_length, pin_width, pin_height])
         #row 3
-        pyrosim.Send_Cube(name="Pin4Base", pos=[start_x + 1, start_y + 1, start_z] , size = [pin_length, pin_width, pin_height])
-        pyrosim.Send_Cube(name="Pin5Base", pos=[start_x + 1, start_y, start_z] , size = [pin_length, pin_width, pin_height])
-        pyrosim.Send_Cube(name="Pin6Base", pos=[start_x + 1, start_y - 1, start_z] , size = [pin_length, pin_width, pin_height])
+        pyrosim.Send_Cube(name="Pin4Base", pos=[start_x + 0.7, start_y + 0.7, start_z] , size = [pin_length, pin_width, pin_height])
+        pyrosim.Send_Cube(name="Pin5Base", pos=[start_x + 0.7, start_y, start_z] , size = [pin_length, pin_width, pin_height])
+        pyrosim.Send_Cube(name="Pin6Base", pos=[start_x + 0.7, start_y - 0.7, start_z] , size = [pin_length, pin_width, pin_height])
         #row 4
-        pyrosim.Send_Cube(name="Pin7Base", pos=[start_x + 1.5, start_y + 1.5, start_z] , size = [pin_length, pin_width, pin_height])
-        pyrosim.Send_Cube(name="Pin8Base", pos=[start_x + 1.5, start_y + 0.5, start_z] , size = [pin_length, pin_width, pin_height])
-        pyrosim.Send_Cube(name="Pin9Base", pos=[start_x + 1.5, start_y - 0.5, start_z] , size = [pin_length, pin_width, pin_height])
-        pyrosim.Send_Cube(name="Pin10Base", pos=[start_x + 1.5, start_y - 1.5, start_z] , size = [pin_length, pin_width, pin_height])
+        pyrosim.Send_Cube(name="Pin7Base", pos=[start_x + 1.05, start_y + 1.05, start_z] , size = [pin_length, pin_width, pin_height])
+        pyrosim.Send_Cube(name="Pin8Base", pos=[start_x + 1.05, start_y + 0.35, start_z] , size = [pin_length, pin_width, pin_height])
+        pyrosim.Send_Cube(name="Pin9Base", pos=[start_x + 1.05, start_y - 0.35, start_z] , size = [pin_length, pin_width, pin_height])
+        pyrosim.Send_Cube(name="Pin10Base", pos=[start_x + 1.05, start_y - 1.05, start_z] , size = [pin_length, pin_width, pin_height])
 
         #Tells pyrosim to close the sdf file.
         pyrosim.End()
@@ -72,7 +72,7 @@ class SOLUTION:
         #z is height
 
         #torso
-        pyrosim.Send_Cube(name="Torso", pos=[0, 0, 1.475] , size=[3, 2.5, 1.25],colorString='<color rgba="0.1 0.1 0.4 1.0"/>')
+        pyrosim.Send_Cube(name="Torso", pos=[0, 0, 1.475] , size=[3, 2.5, 1.25], colorString='<color rgba="0.415 0.553 0.4 1.0"/>', materialName='<material name="Green">', mass=40)
 
         #leg #1 - back left  
         pyrosim.Send_Joint(name = "Torso_LegBackLeft" , parent= "Torso" , child = "LegBackLeft" , type = "revolute", position = [-1.3125, -1.0625, 1.1], jointAxis = "1 1 0")
@@ -112,11 +112,11 @@ class SOLUTION:
 
         #shell #1
         pyrosim.Send_Joint(name = "Torso_Shell1" , parent= "Torso" , child = "Shell1" , type = "revolute", position = [0, 0, 2.1], jointAxis = "0 1 0")
-        pyrosim.Send_Cube(name="Shell1", pos=[0, 0, 0.05], size=[2.75, 2.25, 0.1])
+        pyrosim.Send_Cube(name="Shell1", pos=[0, 0, 0.05], size=[2.75, 2.25, 0.1],colorString='<color rgba="0.415 0.553 0.4 1.0"/>', materialName='<material name="Green">')
 
-        #shell #1
+        #shell #2
         pyrosim.Send_Joint(name = "Shell1_Shell2" , parent= "Shell1" , child = "Shell2" , type = "revolute", position = [0, 0, 0.1], jointAxis = "0 1 0")
-        pyrosim.Send_Cube(name="Shell2", pos=[0, 0, 0.05], size=[2.5, 2, 0.1])
+        pyrosim.Send_Cube(name="Shell2", pos=[0, 0, 0.05], size=[2.5, 2, 0.1],colorString='<color rgba="0.415 0.553 0.4 1.0"/>', materialName='<material name="Green">')
 
         pyrosim.End()
 
