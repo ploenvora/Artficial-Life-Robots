@@ -22,20 +22,6 @@ class SOLUTION:
     def __init__(self, ID):
         self.weights = (numpy.random.rand(c.numSensorNeurons, c.numMotorNeurons) * 2) - 1
         self.myID = ID
-
-    # def Evaluate(self, directOrGUI):
-    #     self.Create_World()
-    #     self.Create_Body()
-    #     self.Create_Brain()
-    #     #os.system("python3 simulate.py " + directOrGUI)
-    #     os.system(f"python3.9 simulate.py {directOrGUI} {str(self.myID)} &")
-    #     while not os.path.exists(f"fitness{str(self.myID)}.txt"):
-    #         time.sleep(0.01)
-    #     with open(f"fitness{str(self.myID)}.txt", "r") as file:
-    #         fitnessFile = file.read()
-    #     file.close()
-    #     self.fitness = float(fitnessFile)
-    #     print(self.fitness)
     
     def Start_Simulation(self, directOrGUI):
         self.Create_World()
@@ -51,7 +37,7 @@ class SOLUTION:
             fitnessFile = file.read()
         file.close()
         self.fitness = float(fitnessFile)
-        #print(self.fitness)
+        print(self.fitness)
         os.system(f"rm fitness{str(self.myID)}.txt")
 
     def Create_World(self):
@@ -59,7 +45,7 @@ class SOLUTION:
         # should be stored. This world will currently be called box, because it will only contain a box.
         pyrosim.Start_SDF("world.sdf")
 
-        pyrosim.Send_Sphere(name="BowlingBall" , pos=[2.5, 0, 0.4] , size=[0.4])
+        pyrosim.Send_Sphere(name="BowlingBall" , pos=[2, 0, 0.4] , size=[0.4])
 
         #row 1
         pyrosim.Send_Cube(name="Pin1Base", pos=[start_x, start_y, start_z] , size = [pin_length, pin_width, pin_height])
@@ -158,19 +144,6 @@ class SOLUTION:
         for currentRow in range(c.numSensorNeurons):
             for currentColumn in range(c.numMotorNeurons):
                 pyrosim.Send_Synapse(sourceNeuronName = currentRow, targetNeuronName = currentColumn + c.numSensorNeurons, weight = self.weights[currentRow][currentColumn])
-
-        # pyrosim.Send_Sensor_Neuron(name = 0, linkName = "BowlingBall")
-        # pyrosim.Send_Sensor_Neuron(name = 17, linkName = "Pin1Base")
-        # pyrosim.Send_Sensor_Neuron(name = 2, linkName = "Pin2Base")
-        # pyrosim.Send_Sensor_Neuron(name = 3, linkName = "Pin3Base")
-        # pyrosim.Send_Sensor_Neuron(name = 4, linkName = "Pin4Base")
-        # pyrosim.Send_Sensor_Neuron(name = 5, linkName = "Pin5Base")
-        # pyrosim.Send_Sensor_Neuron(name = 6, linkName = "Pin6Base")
-        # pyrosim.Send_Sensor_Neuron(name = 7, linkName = "Pin7Base")
-        # pyrosim.Send_Sensor_Neuron(name = 8, linkName = "Pin8Base")
-        # pyrosim.Send_Sensor_Neuron(name = 9, linkName = "Pin9Base")
-        # pyrosim.Send_Sensor_Neuron(name = 10, linkName = "Pin10Base")
-
         pyrosim.End()
 
     def Mutate(self):

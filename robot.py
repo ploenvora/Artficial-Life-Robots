@@ -8,6 +8,7 @@ import constants as c
 from sensor import SENSOR
 from motor import MOTOR
 from pyrosim.neuralNetwork import NEURAL_NETWORK
+from world import WORLD
 import os
 
 
@@ -56,21 +57,24 @@ class ROBOT:
         # stateOfLinkZero = p.getLinkState(self.robot,0)
         # positionOfLinkZero = stateOfLinkZero[0]
         # xCoordinateOfLinkZero = positionOfLinkZero[0]
-        basePositionAndOrientation = p.getBasePositionAndOrientation(self.robot)
-        basePosition = basePositionAndOrientation[0]
-        xPosition = basePosition[0]
-        zPosition = basePosition[2]
+        myWorld = WORLD()
+        positions = myWorld.getPositions()
+        zPinPositionSum = sum([tuple[2] for tuple in positions[1:]])
+        # basePositionAndOrientation = p.getBasePositionAndOrientation(self.robot)
+        # basePosition = basePositionAndOrientation[0]
+        # xPosition = basePosition[0]
+        # zPosition = basePosition[2]
         #print("\n\n\n", basePositionAndOrientation, "\n\n\n")
 
         #Floating on air
-        sum = 0
-        for sensor_name, sensor in self.sensors.items():
-            sum = sum + numpy.mean(sensor.values)
-        meanSensorValues = sum/4
+        # sum = 0
+        # for sensor_name, sensor in self.sensors.items():
+        #     sum = sum + numpy.mean(sensor.values)
+        # meanSensorValues = sum/4
         #print("\n\n\n", meanSensorValues, "\n\n\n")
 
         with open(f"tmp{str(myID)}.txt", "w") as file:
-            file.write(str(meanSensorValues))
+            file.write(str(zPinPositionSum))
         file.close()
         os.system(f"mv 'tmp{myID}.txt' 'fitness{myID}.txt'")            
 

@@ -25,7 +25,6 @@ class PARALLEL_HILL_CLIMBER:
         self.Spawn()
         self.Mutate()
         self.Evaluate(self.children)
-        #self.Print()
         self.Select()
     
     def Spawn(self):
@@ -34,26 +33,19 @@ class PARALLEL_HILL_CLIMBER:
             self.children[key] = copy.deepcopy(self.parents[key])
             self.children[key].Set_ID(self.nextAvailableID)
             self.nextAvailableID = self.nextAvailableID + 1
-        # self.child = copy.deepcopy(self.parent)
-        # self.child.Set_ID(self.nextAvailableID)
-        # self.nextAvailableID = self.nextAvailableID + 1
 
     def Mutate(self):
         for child in self.children.values():
             child.Mutate()
 
     def Select(self):
-        #print(self.parent.fitness, self.child.fitness)
         for key in self.parents.keys():
             if self.parents[key].fitness > self.children[key].fitness:
                 self.parents[key] = self.children[key]
 
     def Print(self):
-        # Modify Print() to iterate through the keys in self.parents, and print the fitness of self.parents[key] and then the fitness of self.children[key] on the same line.
-        # Right at the start and right at the end of Print(), print an empty line. This will separate the two rows of parent/child fitnesses from the next two rows of parent/child fitness values in the next generation.
         for key in self.parents.keys():
             print("\n", self.parents[key].fitness, self.children[key].fitness, "\n")
-        #print("\n", self.parent.fitness, self.child.fitness)
 
     def Show_Best(self):
         for key in self.parents.keys():
@@ -62,7 +54,6 @@ class PARALLEL_HILL_CLIMBER:
                 best_fitness = self.parents[key].fitness
                 best_parent = self.parents[key]
         best_parent.Start_Simulation("GUI")
-        #self.parent.Evaluate("GUI")
 
     def Evaluate(self, solutions):
         for item in solutions.values():
@@ -70,4 +61,3 @@ class PARALLEL_HILL_CLIMBER:
 
         for item in solutions.values():
             item.Wait_For_Simulation_To_End("DIRECT")
-            #print(item.fitness)
