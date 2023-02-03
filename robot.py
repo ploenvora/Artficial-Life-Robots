@@ -27,8 +27,13 @@ class ROBOT:
             self.sensors[linkName] = SENSOR(linkName)
     
     def Sense(self, t):
+        index = 0
         for sensor_name, sensor in self.sensors.items():
             sensor.Get_Value(t)
+            # Marching to the beat
+            # if index == 0:
+            #     sensor.values[t] = numpy.sin(15*t)
+            # index += 1
 
     def Prepare_To_Act(self):
         self.motors = {}
@@ -48,11 +53,24 @@ class ROBOT:
         #self.nn.Print()
 
     def Get_Fitness(self, myID):
-        stateOfLinkZero = p.getLinkState(self.robot,0)
-        positionOfLinkZero = stateOfLinkZero[0]
-        xCoordinateOfLinkZero = positionOfLinkZero[0]
+        # stateOfLinkZero = p.getLinkState(self.robot,0)
+        # positionOfLinkZero = stateOfLinkZero[0]
+        # xCoordinateOfLinkZero = positionOfLinkZero[0]
+        basePositionAndOrientation = p.getBasePositionAndOrientation(self.robot)
+        basePosition = basePositionAndOrientation[0]
+        xPosition = basePosition[0]
+        zPosition = basePosition[2]
+        #print("\n\n\n", basePositionAndOrientation, "\n\n\n")
+
+        #Floating on air
+        sum = 0
+        for sensor_name, sensor in self.sensors.items():
+            sum = sum + numpy.mean(sensor.values)
+        meanSensorValues = sum/4
+        #print("\n\n\n", meanSensorValues, "\n\n\n")
+
         with open(f"tmp{str(myID)}.txt", "w") as file:
-            file.write(str(xCoordinateOfLinkZero))
+            file.write(str(meanSensorValues))
         file.close()
         os.system(f"mv 'tmp{myID}.txt' 'fitness{myID}.txt'")            
 
