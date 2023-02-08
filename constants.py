@@ -9,7 +9,7 @@ import random
 steps = 1000
 
 # back leg
-forceBack = 100000
+forceBack = 500
 amplitudeBack = numpy.pi
 frequencyBack = 20
 phaseOffsetBack = 0
@@ -22,12 +22,10 @@ frequencyFront = 20
 phaseOffsetFront = numpy.pi/4
 motorCommandFront = amplitudeFront * numpy.sin(frequencyFront * numpy.arange(1000) * (numpy.pi/499.5) + phaseOffsetFront)
 
+
 numberOfGenerations  = 1
 populationSize = 1
 
-numSensorNeurons = 9
+numSensorNeurons = 4
 numMotorNeurons = 8
-motorJointRange = 0.3
-
-ball = 1
-pins = 10
+motorJointRange = 1

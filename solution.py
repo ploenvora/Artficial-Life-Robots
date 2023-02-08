@@ -61,14 +61,25 @@ class SOLUTION:
     def Create_Body(self):
         pyrosim.Start_URDF("body.urdf")
 
-        linksMin = 5
-        linksMax = 10
-        sizeMin = 0.5
+        linksMin = 8
+        linksMax = 15
+        sizeMin = 0.3
         sizeMax = 1
 
         #generate random number of links between 5 - 10
         global linksNumber
         linksNumber = linksMin + int((linksMax - linksMin + 1) * random.random())
+
+        linksSensorMin = int(linksNumber/2) - 2
+        linksSensorMax = int((linksNumber + 1)/2) + 2
+
+        global linksSensorNumber
+        linksSensorNumber = linksSensorMin + int((linksSensorMax - linksSensorMin + 1) * random.random())
+
+        #choose links that have sensors
+        global linksSensor
+        linksSensor = numpy.random.choice(numpy.arange(linksNumber), size=linksSensorNumber, replace=False)
+        print("links number:", linksNumber, "links sensor", linksSensorNumber, "links with sensor:", linksSensor)
 
         #generate an array of link sizes
         global linksSizes
@@ -91,14 +102,25 @@ class SOLUTION:
         yPos = 0
         zPos = maxHeight/2
 
-        for link in range(1, linksNumber):
-            pyrosim.Send_Cube(name = "Link" + str(link - 1), pos = [xPos,yPos,zPos], size=linksSizes[link - 1])
-            xPos = (linksSizes[link][0])/2
+        for link in range(linksNumber):
+            if link in linksSensor:
+                pyrosim.Send_Cube(name = "Link" + str(link), pos = [xPos,yPos, zPos], size=linksSizes[link], colorString='<color rgba="0.164 0.776 0.478 1.0"/>', materialName='<material name="Green">')
+            else: 
+                pyrosim.Send_Cube(name = "Link" + str(link), pos = [xPos,yPos, zPos], size=linksSizes[link], colorString='<color rgba="0.164 0.776 0.95 1.0"/>', materialName='<material name="Blue">')
+            if link < linksNumber - 1:
+                xPos = (linksSizes[link + 1][0])/2
+                zPos = 0
         
         global jointNames
         jointNames = []
-        for joint in range(linksNumber - 2):
-            pyrosim.Send_Joint(name = f"Link{joint}_Link{joint+1}", parent = "Link" + str(joint), child = "Link" + str(joint+1), type = "revolute", position = [(linksSizes[joint][0]),yPos,zPos], jointAxis = "0 1 0")
+        zPos = maxHeight/2
+        for joint in range(linksNumber - 1):
+            if joint == 0:
+                xPos = (linksSizes[joint][0])/2
+            else:
+                xPos = (linksSizes[joint][0])
+            pyrosim.Send_Joint(name = f"Link{joint}_Link{joint+1}", parent = "Link" + str(joint), child = "Link" + str(joint+1), type = "revolute", position = [xPos,yPos,zPos], jointAxis = "0 1 0")
+            zPos = 0
             jointNames = numpy.append(jointNames, f"Link{joint}_Link{joint+1}")
 
         pyrosim.End()
@@ -106,17 +128,18 @@ class SOLUTION:
     def Create_Brain(self):
         pyrosim.Start_NeuralNetwork(f"brain{self.myID}.nndf")
 
-        for link in range(linksNumber - 1):
-            pyrosim.Send_Sensor_Neuron(name = str(link), linkName = "Link" + str(link))
+        for link in range(linksSensorNumber):
+            pyrosim.Send_Sensor_Neuron(name = str(link), linkName = "Link" + str(linksSensor[link]))
 
-        for joint in range(linksNumber - 2):
-            pyrosim.Send_Motor_Neuron(name = str(joint), jointName = str(jointNames[joint]))
+        for joint in range(linksNumber - 1):
+            pyrosim.Send_Motor_Neuron(name = str(joint + link + 1), jointName = str(jointNames[joint]))
         
-        self.weights = (numpy.random.rand(linksNumber, linksNumber - 1) * 2) - 1
+        self.weights = (numpy.random.rand(linksSensorNumber, linksNumber - 1) * 2) - 1
+        print(self.weights)
 
-        for currentRow in range(linksNumber):
-            for currentColumn in range(linksNumber - 2):
-                pyrosim.Send_Synapse(sourceNeuronName = str(currentRow), targetNeuronName = str(currentColumn + linksNumber), weight = self.weights[currentRow][currentColumn])
+        for currentRow in range(linksSensorNumber):
+            for currentColumn in range(linksNumber - 1):
+                pyrosim.Send_Synapse(sourceNeuronName = str(currentRow), targetNeuronName = str(currentColumn + linksSensorNumber), weight = self.weights[currentRow][currentColumn])
 
         pyrosim.End()
 

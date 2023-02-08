@@ -23,9 +23,8 @@ class SIMULATION:
         #Set gravity
         p.setGravity(0,0,-9.8)
         self.myID = solutionID
-        #self.world = WORLD()
+        self.world = WORLD()
         self.robot = ROBOT(self.myID)
-        self.world = self.robot.world
     
     def Run(self):
         for i in range(1000):

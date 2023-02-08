@@ -11,13 +11,4 @@ class WORLD:
         # #Adding a floor
         self.planeId = p.loadURDF("plane.urdf")
         #Tells pybullet to read in the world described in box.sdf
-        #p.loadSDF("world.sdf")
-        self.objects = p.loadSDF("world.sdf")
-
-    def getPositions(self):
-        positions = list()
-        for obj in range(c.ball + c.pins):
-            positions.append(p.getBasePositionAndOrientation(self.objects[obj])[0])
-        return positions
-
-
+        p.loadSDF("world.sdf")
