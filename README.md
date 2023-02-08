@@ -8,5 +8,5 @@ The minimum and maximum number of links and the minimum and maximum link sizes c
 
 ## How to Run
 
-Generate a random snake bu running search.py!
+Generate a random snake by running search.py!
 
