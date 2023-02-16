@@ -61,85 +61,124 @@ class SOLUTION:
     def Create_Body(self):
         pyrosim.Start_URDF("body.urdf")
 
-        linksMin = 8
-        linksMax = 15
-        sizeMin = 0.3
-        sizeMax = 1
+        linksMin = 50
+        linksMax = 70
+        sizeMin = 0.1
+        sizeMax = 0.1
 
-        #generate random number of links between 5 - 10
-        global linksNumber
-        linksNumber = linksMin + int((linksMax - linksMin + 1) * random.random())
+        global numLinks
+        numLinks = random.randint(linksMin, linksMax)
 
-        linksSensorMin = int(linksNumber/2) - 2
-        linksSensorMax = int((linksNumber + 1)/2) + 2
+        # Starting link
+        width = random.uniform(sizeMin, sizeMax)
+        length = random.uniform(sizeMin, sizeMax)
+        height = random.uniform(sizeMin, sizeMax)
+        global links
+        links = [self.Link("Link0", (width, length, height))]
+        links[0].position = (0, 0, height/2 + 1.5)
+        links[0].relative = (0, 0, height/2 + 1.5)
+        links[0].faces_chosen = []
+        global joints
+        joints = []
+        counter = 1
 
-        global linksSensorNumber
-        linksSensorNumber = linksSensorMin + int((linksSensorMax - linksSensorMin + 1) * random.random())
+        # Generate links and joints to complete the structure
+        while len(links) != numLinks:
+            # Create a new link
+            width = random.uniform(sizeMin, sizeMax)
+            length = random.uniform(sizeMin, sizeMax)
+            height = random.uniform(sizeMin, sizeMax)
+            newLink = self.Link("Link" + str(counter), (width, length, height))
 
-        #choose links that have sensors
-        global linksSensor
-        linksSensor = numpy.random.choice(numpy.arange(linksNumber), size=linksSensorNumber, replace=False)
-        print("links number:", linksNumber, "links sensor", linksSensorNumber, "links with sensor:", linksSensor)
-
-        #generate an array of link sizes
-        global linksSizes
-        linksSizes = numpy.empty((0, 3))
-        global maxHeight
-        maxHeight = 0.5
-
-        for link in range(linksNumber):
-            width = sizeMin + (sizeMax - sizeMin) * random.random()
-            length = sizeMin + (sizeMax - sizeMin) * random.random()
-            height = sizeMin + (sizeMax - sizeMin) * random.random()
-            if height > maxHeight:
-                maxHeight = height
-                #link with the tallest Z
-                maxLink = link
-            tup = (width, length, height)
-            linksSizes = numpy.vstack((linksSizes, tup))
-        
-        xPos = 0
-        yPos = 0
-        zPos = maxHeight/2
-
-        for link in range(linksNumber):
-            if link in linksSensor:
-                pyrosim.Send_Cube(name = "Link" + str(link), pos = [xPos,yPos, zPos], size=linksSizes[link], colorString='<color rgba="0.164 0.776 0.478 1.0"/>', materialName='<material name="Green">')
+            # Find a random link to connect it to 
+            parentLink = random.choice(links)
+            px, py, pz = parentLink.position[0], parentLink.position[1],parentLink.position[2]
+            pw, pl, ph = parentLink.size[0], parentLink.size[1], parentLink.size[2]
+            
+            # Chose a face
+            face, sx, sy, sz = parentLink.choseFace()
+            if not face:
+                continue
+            
+            # Use the face to determine the joint positions, if there are no joints it starts from the origin
+            if parentLink.name == "Link0":
+                jx, jy, jz = px + sx*pw/2, py + sy*pl/2, pz + sz*ph/2
+                absolute = (jx, jy, jz)
             else: 
-                pyrosim.Send_Cube(name = "Link" + str(link), pos = [xPos,yPos, zPos], size=linksSizes[link], colorString='<color rgba="0.164 0.776 0.95 1.0"/>', materialName='<material name="Blue">')
-            if link < linksNumber - 1:
-                xPos = (linksSizes[link + 1][0])/2
-                zPos = 0
-        
-        global jointNames
-        jointNames = []
-        zPos = maxHeight/2
-        for joint in range(linksNumber - 1):
-            if joint == 0:
-                xPos = (linksSizes[joint][0])/2
+                parentJoint = [joint for joint in joints if joint.child == parentLink.name][0]
+                absolute = (px + sx*pw/2, py + sy*pl/2, pz + sz*ph/2)
+                jx, jy, jz = tuple(x - y for x, y in zip(absolute, parentJoint.position))  
+            
+            newJoint = self.Joint(f"{parentLink.name}_{newLink.name}", parentLink.name, newLink.name, absolute, (jx, jy, jz))
+            
+            # Input the absolute and relative position of the links
+            newLink.relative = (width * sx/2, length * sy/2, height * sz/2)
+            newLink.position = (px + sx*(pw+width)/2, py + sy*(pl+length)/2, pz + sz*(ph+height)/2)
+            newLink.faces_chosen = []
+            
+            # Check for intersections with other links
+            intersects = False
+            for otherLink in links:
+                if newLink.intersects(otherLink):
+                    intersects = True
+            
+            if intersects:
+                continue
             else:
-                xPos = (linksSizes[joint][0])
-            pyrosim.Send_Joint(name = f"Link{joint}_Link{joint+1}", parent = "Link" + str(joint), child = "Link" + str(joint+1), type = "revolute", position = [xPos,yPos,zPos], jointAxis = "0 1 0")
-            zPos = 0
-            jointNames = numpy.append(jointNames, f"Link{joint}_Link{joint+1}")
+                links.append(newLink)
+                parentLink.faces_chosen.append(face)
+                oppositeFace = face.replace("+", "_").replace("-", "+").replace("_", "-")
+                newLink.faces_chosen.append(oppositeFace)
+                joints.append(newJoint)
+                counter += 1
+        
+        print("Links:")
+        for link in links:
+            print(link)
+        print("Joints:")
+        for joint in joints:
+            print(joint)
+
+        #Generate links
+        global unsensoredLinks
+        global sensoredLinks
+        unsensoredLinks = []
+        sensoredLinks = []
+        for link in range(numLinks):
+            randomBool = random.choice([True, False])
+            if randomBool:
+                sensoredLinks.append(("Link"+str(link), link))
+                pyrosim.Send_Cube(name = "Link" + str(link), pos = (links[link].relative[0], links[link].relative[1], links[link].relative[2]), size=links[link].size, colorString='<color rgba="0.164 0.776 0.478 1.0"/>', materialName='<material name="Green">')
+            else:
+                unsensoredLinks.append(("Link"+str(link), link))
+                pyrosim.Send_Cube(name = "Link" + str(link), pos = (links[link].relative[0], links[link].relative[1], links[link].relative[2]), size=links[link].size, colorString='<color rgba="0.164 0.776 0.95 1.0"/>', materialName='<material name="Blue">')
+
+        for joint in joints:
+            randomBool2 = random.choice([1, 2, 3])
+            if randomBool2 == 1:
+                pyrosim.Send_Joint(name = joint.name, parent = joint.parent, child = joint.child, type = "revolute", position = (joint.relative[0], joint.relative[1], joint.relative[2]), jointAxis = "0 1 0")
+            elif randomBool2 == 2:
+                pyrosim.Send_Joint(name = joint.name, parent = joint.parent, child = joint.child, type = "revolute", position = (joint.relative[0], joint.relative[1], joint.relative[2]), jointAxis = "1 0 0")
+            else:
+                pyrosim.Send_Joint(name = joint.name, parent = joint.parent, child = joint.child, type = "fixed", position = (joint.relative[0], joint.relative[1], joint.relative[2]), jointAxis = "0 1 0")
 
         pyrosim.End()
 
     def Create_Brain(self):
         pyrosim.Start_NeuralNetwork(f"brain{self.myID}.nndf")
 
-        for link in range(linksSensorNumber):
-            pyrosim.Send_Sensor_Neuron(name = str(link), linkName = "Link" + str(linksSensor[link]))
+        for link in range(len(sensoredLinks)):
+            pyrosim.Send_Sensor_Neuron(name = str(link), linkName = "Link" + str(sensoredLinks[link][1]))
 
-        for joint in range(linksNumber - 1):
-            pyrosim.Send_Motor_Neuron(name = str(joint + link + 1), jointName = str(jointNames[joint]))
+        for joint in range(len(joints)):
+            pyrosim.Send_Motor_Neuron(name = str(joint + link + 1), jointName = joints[joint].name)
         
-        self.weights = (numpy.random.rand(linksSensorNumber, linksNumber - 1) * 2) - 1
-        print(self.weights)
+        self.weights = (numpy.random.rand(numLinks, numLinks - 1) * 2) - 1
+        # print(self.weights)
 
-        for currentRow in range(linksSensorNumber):
-            for currentColumn in range(linksNumber - 1):
-                pyrosim.Send_Synapse(sourceNeuronName = str(currentRow), targetNeuronName = str(currentColumn + linksSensorNumber), weight = self.weights[currentRow][currentColumn])
+        for currentRow in range(len(sensoredLinks)):
+            for currentColumn in range(len(joints)):
+                pyrosim.Send_Synapse(sourceNeuronName = str(currentRow), targetNeuronName = str(currentColumn + len(sensoredLinks)), weight = self.weights[currentRow][currentColumn])
 
         pyrosim.End()
 
@@ -150,3 +189,51 @@ class SOLUTION:
 
     def Set_ID(self, ID):
         self.myID = ID
+
+    # Declaring new classes
+    class Link:
+        def __init__(self, name, size, position = None, relative = None, faces_chosen = []):
+            self.name = name
+            self.size = size
+            self.position = position
+            self.relative = relative
+            self.faces_chosen = faces_chosen
+        
+        def __str__(self):
+            return "{}: position={}, relative={}, size={} \n".format(self.name, self.position, self.relative, self.size)
+        
+        def intersects(self, other_link):
+            dx = abs(self.position[0] - other_link.position[0])
+            dy = abs(self.position[1] - other_link.position[1])
+            dz = abs(self.position[2] - other_link.position[2])
+            if dx < (self.size[0] + other_link.size[0])/2 and dy < (self.size[1] + other_link.size[1])/2 and dz < (self.size[2] + other_link.size[2])/2:
+                return True
+            return False
+        
+        def choseFace(self):
+            # If the list is full (all faces have joints)
+            if len(self.faces_chosen) == 6:
+                return False, None, None, None
+            
+            while True:
+                # Choose a random face
+                face, sx, sy, sz = random.choice([("x+", 1, 0, 0), 
+                                                ("x-", -1, 0, 0), 
+                                                ("y+", 0, 1, 0), 
+                                                ("y-", 0, -1, 0), 
+                                                ("z+", 0, 0, 1), 
+                                                ("z-", 0, 0, -1)])
+                # If face is not in list, return
+                if face not in self.faces_chosen:
+                    return face, sx, sy, sz
+
+    class Joint:
+        def __init__(self, name, parent, child, position, relative):
+            self.name = name
+            self.parent = parent
+            self.child = child
+            self.position = position
+            self.relative = relative
+        
+        def __str__(self):
+            return "{}: parent={}, child={}, position={}, relative={}".format(self.name, self.parent, self.child, self.position, self.relative)
