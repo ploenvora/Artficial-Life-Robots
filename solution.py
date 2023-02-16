@@ -61,10 +61,10 @@ class SOLUTION:
     def Create_Body(self):
         pyrosim.Start_URDF("body.urdf")
 
-        linksMin = 50
-        linksMax = 70
-        sizeMin = 0.1
-        sizeMax = 0.1
+        linksMin = 10
+        linksMax = 20
+        sizeMin = 0.2
+        sizeMax = 1
 
         global numLinks
         numLinks = random.randint(linksMin, linksMax)
@@ -75,8 +75,8 @@ class SOLUTION:
         height = random.uniform(sizeMin, sizeMax)
         global links
         links = [self.Link("Link0", (width, length, height))]
-        links[0].position = (0, 0, height/2 + 1.5)
-        links[0].relative = (0, 0, height/2 + 1.5)
+        links[0].position = (0, 0, height/2 + 2)
+        links[0].relative = (0, 0, height/2 + 2)
         links[0].faces_chosen = []
         global joints
         joints = []
