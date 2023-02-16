@@ -24,6 +24,14 @@ The minimum and maximum number of links and the minimum and maximum link sizes c
 
 8. Repeat steps 2 - 7 over and over again until the number of links on the creater = numLinks! :)
 
+### Example Diagram
+
+![IMG_0148](https://user-images.githubusercontent.com/63747047/219509066-d8fbee92-a0d3-4b9c-b00f-926d0ee4f0d1.jpg)
+
+![IMG_0150](https://user-images.githubusercontent.com/63747047/219509087-d4236a4d-dd08-4118-8f4a-88a49244c392.jpg)
+
+![IMG_0149](https://user-images.githubusercontent.com/63747047/219509078-d81ea2d1-2113-458a-ba86-50fb10734209.jpg)
+
 ## How to Run
 
 Generate a random 3D creature by running search.py/main.py! :)
