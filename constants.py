@@ -22,9 +22,8 @@ frequencyFront = 20
 phaseOffsetFront = numpy.pi/4
 motorCommandFront = amplitudeFront * numpy.sin(frequencyFront * numpy.arange(1000) * (numpy.pi/499.5) + phaseOffsetFront)
 
-
-numberOfGenerations  = 1
-populationSize = 1
+numberOfGenerations  = 10
+populationSize = 10
 
 numSensorNeurons = 4
 numMotorNeurons = 8

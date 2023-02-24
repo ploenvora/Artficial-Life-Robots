@@ -14,11 +14,13 @@ import os
 class ROBOT:
     def __init__(self, solutionID):
         #Adding a robot
-        self.robot = p.loadURDF("body.urdf")
+        self.robot = p.loadURDF(f"body{solutionID}.nndf")
+        self.solutionID = solutionID
         pyrosim.Prepare_To_Simulate(self.robot)
         self.Prepare_To_Sense()
         self.Prepare_To_Act()
         self.nn = NEURAL_NETWORK(f"brain{solutionID}.nndf")
+        #os.system(f"rm body{solutionID}.nndf")
         #os.system(f"rm brain{solutionID}.nndf")
 
     def Prepare_To_Sense(self):
@@ -48,13 +50,13 @@ class ROBOT:
         #self.nn.Print()
 
     def Get_Fitness(self, myID):
-        stateOfLinkZero = p.getLinkState(self.robot,0)
+        stateOfLinkZero = p.getLinkState(self.robot, 0)
         positionOfLinkZero = stateOfLinkZero[0]
         xCoordinateOfLinkZero = positionOfLinkZero[0]
         with open(f"tmp{str(myID)}.txt", "w") as file:
             file.write(str(xCoordinateOfLinkZero))
         file.close()
-        os.system(f"mv 'tmp{myID}.txt' 'fitness{myID}.txt'")            
+        os.system(f"mv 'tmp{myID}.txt' 'fitness{myID}.txt'")           
 
 
 

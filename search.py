@@ -1,4 +1,5 @@
 import os
+import time
 from hillclimber import HILL_CLIMBER
 from parallelHillClimber import PARALLEL_HILL_CLIMBER
 
@@ -9,3 +10,7 @@ from parallelHillClimber import PARALLEL_HILL_CLIMBER
 phc = PARALLEL_HILL_CLIMBER()
 phc.Evolve()
 phc.Show_Best()
+time.sleep(120)
+os.system("rm *brain*.nndf")
+os.system("rm *body*.nndf")
+

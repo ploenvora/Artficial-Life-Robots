@@ -10,21 +10,23 @@ class PARALLEL_HILL_CLIMBER:
         self.parents = {}
         self.nextAvailableID = 0
         for item in range(c.populationSize):
+            print("\ninitialized once\n")
             self.parents[item] = SOLUTION(self.nextAvailableID)
-            self.nextAvailableID = self.nextAvailableID + 1
+            self.nextAvailableID += 1
+        print("\nend of phc initialization\n")
 
     def Evolve(self):
+        print("\nstart of evolve\n")
         self.Evaluate(self.parents)
         for currentGeneration in range(c.numberOfGenerations):
             self.Evolve_For_One_Generation()
-        #     # if currentGeneration == 0:
-        #     #     self.parent.Evaluate("GUI")
+        print("\nend of evolved\n")
 
     def Evolve_For_One_Generation(self):
         self.Spawn()
         self.Mutate()
         self.Evaluate(self.children)
-        self.Print()
+        #self.Print()
         self.Select()
     
     def Spawn(self):
@@ -32,11 +34,9 @@ class PARALLEL_HILL_CLIMBER:
         for key in self.parents.keys():
             self.children[key] = copy.deepcopy(self.parents[key])
             self.children[key].Set_ID(self.nextAvailableID)
-            self.nextAvailableID = self.nextAvailableID + 1
-        # self.child = copy.deepcopy(self.parent)
-        # self.child.Set_ID(self.nextAvailableID)
-        # self.nextAvailableID = self.nextAvailableID + 1
+            self.nextAvailableID += 1
 
+    # We need to edit this function
     def Mutate(self):
         for child in self.children.values():
             child.Mutate()
@@ -44,6 +44,8 @@ class PARALLEL_HILL_CLIMBER:
     def Select(self):
         #print(self.parent.fitness, self.child.fitness)
         for key in self.parents.keys():
+            print("\nkey:", key, "\nparent solutionID:", self.parents[key].myID, "\nchild solutionID:", self.children[key].myID)
+            print("\nparent fitness:", self.parents[key].fitness, "\nchild fitness:", self.children[key].fitness)
             if self.parents[key].fitness > self.children[key].fitness:
                 self.parents[key] = self.children[key]
 
@@ -55,18 +57,16 @@ class PARALLEL_HILL_CLIMBER:
         #print("\n", self.parent.fitness, self.child.fitness)
 
     def Show_Best(self):
-        best_fitness = 200
+        best_fitness = float('inf')
         for key in self.parents.keys():
             if self.parents[key].fitness < best_fitness:
                 best_fitness = self.parents[key].fitness
                 best_parent = self.parents[key]
-        best_parent.Start_Simulation("GUI")
-        #self.parent.Evaluate("GUI")
+        print("\nstarting show best\n\nthe best fitness:", best_fitness)
+        best_parent.Start_Simulation_Best("GUI")
 
     def Evaluate(self, solutions):
         for item in solutions.values():
             item.Start_Simulation("DIRECT")
-
         for item in solutions.values():
             item.Wait_For_Simulation_To_End("DIRECT")
-            #print(item.fitness)

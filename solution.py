@@ -17,36 +17,38 @@ class SOLUTION:
         self.weights = []
         self.myID = ID
 
-    def Evaluate(self, directOrGUI):
-        self.Create_World()
-        self.Create_Body()
-        self.Create_Brain()
-        #os.system("python3 simulate.py " + directOrGUI)
-        os.system(f"python3.9 simulate.py {directOrGUI} {str(self.myID)} &")
-        while not os.path.exists(f"fitness{str(self.myID)}.txt"):
-            time.sleep(0.01)
-        with open(f"fitness{str(self.myID)}.txt", "r") as file:
-            fitnessFile = file.read()
-        file.close()
-        self.fitness = float(fitnessFile)
-        print(self.fitness)
+    # def Evaluate(self, directOrGUI):
+    #     self.Create_World()
+    #     self.Create_Body()
+    #     self.Create_Brain()
+    #     os.system(f"python3.9 simulate.py {directOrGUI} {str(self.myID)} &")
+    #     while not os.path.exists(f"fitness{str(self.myID)}.txt"):
+    #         time.sleep(0.01)
+    #     with open(f"fitness{str(self.myID)}.txt", "r") as file:
+    #         fitnessFile = file.read()
+    #     file.close()
+    #     self.fitness = float(fitnessFile)
+    #     print("\nfitness:", self.fitness)
     
     def Start_Simulation(self, directOrGUI):
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
-        #os.system("python3 simulate.py " + directOrGUI)
+        print("\n\nStarting the similation of", self.myID)
+        os.system(f"python3.9 simulate.py {directOrGUI} {str(self.myID)} &")
+    
+    def Start_Simulation_Best(self, directOrGUI):
         os.system(f"python3.9 simulate.py {directOrGUI} {str(self.myID)} &")
     
     def Wait_For_Simulation_To_End(self, directOrGUI):
-        while not os.path.exists(f"fitness{str(self.myID)}.txt"):
+        fileName = "fitness" + str(self.myID) + ".txt"
+        while not os.path.exists(fileName):
             time.sleep(0.01)
-        with open(f"fitness{str(self.myID)}.txt", "r") as file:
-            fitnessFile = file.read()
-        file.close()
-        self.fitness = float(fitnessFile)
-        #print(self.fitness)
-        os.system(f"rm fitness{str(self.myID)}.txt")
+        f = open(fileName, "r")
+        self.fitness = float(f.read())
+        print("\n\nfitness:", self.fitness)
+        f.close()
+        os.system("rm " + fileName)
 
     def Create_World(self):
         #Tells pyrosim the name of the file where information about the world you're about to create 
@@ -54,12 +56,12 @@ class SOLUTION:
         pyrosim.Start_SDF("world.sdf")
         
         pyrosim.Send_Cube(name="Box", pos=[x + 5,y + 5,z] , size=[width, length, height])
-
+        
         #Tells pyrosim to close the sdf file.
         pyrosim.End()
 
     def Create_Body(self):
-        pyrosim.Start_URDF("body.urdf")
+        pyrosim.Start_URDF(f"body{self.myID}.nndf")
 
         linksMin = 5
         linksMax = 10
@@ -132,12 +134,12 @@ class SOLUTION:
                 joints.append(newJoint)
                 counter += 1
         
-        print("Links:")
-        for link in links:
-            print(link)
-        print("Joints:")
-        for joint in joints:
-            print(joint)
+        # print("Links:")
+        # for link in links:
+        #     print(link)
+        # print("Joints:")
+        # for joint in joints:
+        #     print(joint)
 
         #Generate links
         global unsensoredLinks
@@ -160,7 +162,7 @@ class SOLUTION:
             elif randomBool2 == 2:
                 pyrosim.Send_Joint(name = joint.name, parent = joint.parent, child = joint.child, type = "revolute", position = (joint.relative[0], joint.relative[1], joint.relative[2]), jointAxis = "1 0 0")
             else:
-                pyrosim.Send_Joint(name = joint.name, parent = joint.parent, child = joint.child, type = "fixed", position = (joint.relative[0], joint.relative[1], joint.relative[2]), jointAxis = "0 1 0")
+                pyrosim.Send_Joint(name = joint.name, parent = joint.parent, child = joint.child, type = "revolute", position = (joint.relative[0], joint.relative[1], joint.relative[2]), jointAxis = "0 0 1")
 
         pyrosim.End()
 
@@ -174,7 +176,6 @@ class SOLUTION:
             pyrosim.Send_Motor_Neuron(name = str(joint + link + 1), jointName = joints[joint].name)
         
         self.weights = (numpy.random.rand(numLinks, numLinks - 1) * 2) - 1
-        # print(self.weights)
 
         for currentRow in range(len(sensoredLinks)):
             for currentColumn in range(len(joints)):
