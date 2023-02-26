@@ -35,7 +35,7 @@ The gif below shows a potential body/brain generation. It must be noted that alt
 
 ## How bodies and brains are mutated
 
-For each mutation, there are 4 types of mutations it can undergo: 1) Remove a link, 2) Add a link, 3) Change a link's size, 4) Change a link's sensor senses.
+For each mutation, there are 4 types of mutations it can undergo: 1) Remove a link, 2) Add a link, 3) Change a link's size, 4) Change a link's sensor senses and 5) Change a joint's axis.
 
 1) Remove a link is simply removing a link that exists on the creature
 
@@ -52,6 +52,8 @@ For each mutation, there are 4 types of mutations it can undergo: 1) Remove a li
 4) Changing a link's sensors is making it sensored if previously unsensored and making it unsensored if previously sensored!
 
 ![ezgif com-crop (1)](https://user-images.githubusercontent.com/63747047/221439457-5c933384-a028-42ef-9b93-3a404e7d6f25.gif)
+
+5) Changing a joint's axis. There are 3 types of joint axis as mentioned above. Changing this just means changing the current axis to 1 out of the 2 other types of joint axis avaiable. It's difficult to create a diagram to show this but essentially, if its rotating in the x plane, it would be changed to rotate in the y or z plane, and so on.
 
 ## How to Run
 
