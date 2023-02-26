@@ -1,6 +1,6 @@
-# Assignment 7
+# Assignment 8
 
-Expand the design space ("morphospace") of your random creature generator from asgmt 6 by allowing the chain to branch in 3D. Links with and without sensors should be colored green and blue, respectively.
+Use the parallel hill climber to design morphology and behavior for locomotion.
 
 ## How bodies and brains are generated
 
@@ -18,21 +18,34 @@ The minimum and maximum number of links and the minimum and maximum link sizes c
 
 5. After choosing a face, we must make sure that the addition of this newLink doesn't overlap with other links. If it does, go back to step 2 and generate a newLink.
 
-6. Once we have made sure we passed step 4 and 5, we can then generate the newLink as well as the joint that connects parentLink and newLink. There are 3 types of joints we can generate: 1) a fixed joint, 2) a revolute joint with axis (1, 0, 0) and 3) a revolute joint with axis (0, 1, 0). Choosing a joint type is also a randomized process.
+6. Once we have made sure we passed step 4 and 5, we can then generate the newLink as well as the joint that connects parentLink and newLink. There are 3 types of joints we can generate: 1) a revolute joint with axis (1, 0, 0), 2) a revolute joint with axis (0, 1, 0) and 3) a revolute joint with axis (0, 0, 1). Choosing a joint type is also a randomized process.
 
 7. We must also randomized whether this new link has a sensor or not. There is a 50/50 chance it does/doesn't.
 
-8. Repeat steps 2 - 7 over and over again until the number of links on the creater = numLinks! :)
+8. Repeat steps 2 - 7 over and over again until the number of links on the creater = numLinks!
 
-### Example Diagram
+9. For each creature, the synapse weights will be randomized!
 
-![IMG_0148](https://user-images.githubusercontent.com/63747047/219509066-d8fbee92-a0d3-4b9c-b00f-926d0ee4f0d1.jpg)
+10. You then have a creature with a randomized number of links, randomized link sizes, randomized positions, randomized joint rotations, randomized sensored links and randomized synapses! Yay!
 
-![IMG_0150](https://user-images.githubusercontent.com/63747047/219509087-d4236a4d-dd08-4118-8f4a-88a49244c392.jpg)
+### Example diagram of body/brain generation
 
-![IMG_0149](https://user-images.githubusercontent.com/63747047/219509078-d81ea2d1-2113-458a-ba86-50fb10734209.jpg)
+## How bodies and brains are mutated
+
+For each mutation, there are 4 types of mutations it can undergo: 1) Remove a link, 2) Add a link, 3) Change a link's size, 4) Change a link's sensor senses.
+
+1) Remove a link is simply removing a link that exists on the creature
+
+2) Adding a link is adding a new link onto the creature
+
+3) Changing a link's size is randomize picking a random link and changing it's width, height and length
+
+4) Changing a link's sensors is making it sensored if previously unsensored and making it unsensored if previosly sensored!
 
 ## How to Run
 
 Generate a random 3D creature by running search.py/main.py! :)
+
+## Credits and References
+Thanks to Karl Sims
 
