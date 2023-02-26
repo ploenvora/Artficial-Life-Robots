@@ -29,6 +29,7 @@ The minimum and maximum number of links and the minimum and maximum link sizes c
 10. You then have a creature with a randomized number of links, randomized link sizes, randomized positions, randomized joint rotations, randomized sensored links and randomized synapses! Yay!
 
 ### Example diagram of body/brain generation
+The gif below shows a potential body/brain generation. It must be noted that although the link sizes here are integers (as links are constructed with cubes in the gif), the simulation link sizes can take on non-integer sizes. Blue links represent unsensored links and green represents sensored links. 
 ![ezgif com-crop](https://user-images.githubusercontent.com/63747047/221438685-99344543-7dd7-46a0-b1f7-5f54ff613c65.gif)
 
 ## How bodies and brains are mutated
@@ -37,11 +38,19 @@ For each mutation, there are 4 types of mutations it can undergo: 1) Remove a li
 
 1) Remove a link is simply removing a link that exists on the creature
 
+![ezgif com-crop (4)](https://user-images.githubusercontent.com/63747047/221439442-70deb513-868c-4ca4-9c31-fe0311abed4e.gif)
+
 2) Adding a link is adding a new link onto the creature
+
+![ezgif com-crop (3)](https://user-images.githubusercontent.com/63747047/221439451-e03b7280-af7c-43c3-aea9-4a76d0d35f79.gif)
 
 3) Changing a link's size is randomize picking a random link and changing it's width, height and length
 
+![ezgif com-crop (1)](https://user-images.githubusercontent.com/63747047/221439457-5c933384-a028-42ef-9b93-3a404e7d6f25.gif)
+
 4) Changing a link's sensors is making it sensored if previously unsensored and making it unsensored if previosly sensored!
+
+![ezgif com-crop (2)](https://user-images.githubusercontent.com/63747047/221439462-78418948-07bc-4684-9937-7702b934087f.gif)
 
 ## How to Run
 
