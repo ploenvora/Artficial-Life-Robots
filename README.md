@@ -29,6 +29,7 @@ The minimum and maximum number of links and the minimum and maximum link sizes c
 10. You then have a creature with a randomized number of links, randomized link sizes, randomized positions, randomized joint rotations, randomized sensored links and randomized synapses! Yay!
 
 ### Example diagram of body/brain generation
+![ezgif com-crop](https://user-images.githubusercontent.com/63747047/221438685-99344543-7dd7-46a0-b1f7-5f54ff613c65.gif)
 
 ## How bodies and brains are mutated
 
