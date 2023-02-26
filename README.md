@@ -46,6 +46,6 @@ For each mutation, there are 4 types of mutations it can undergo: 1) Remove a li
 
 Generate a random 3D creature by running search.py/main.py! :)
 
-## Credits and References
+## Citation
 Thanks to Karl Sims
 
