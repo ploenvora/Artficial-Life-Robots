@@ -14,6 +14,7 @@ import os
 class ROBOT:
     def __init__(self, solutionID):
         #Adding a robot
+        print(f"body{solutionID}.nndf")
         self.robot = p.loadURDF(f"body{solutionID}.nndf")
         self.solutionID = solutionID
         pyrosim.Prepare_To_Simulate(self.robot)
