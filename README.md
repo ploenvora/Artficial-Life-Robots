@@ -59,13 +59,16 @@ For each mutation, there are 5 types of mutations it can undergo: 1) Remove a li
 
 Generate a random 3D creature by running search.py/main.py! :)
 
-## Results
+## Experiment
 5 simulations were generated with a population of 50 and 100 mutational genenerations. For each simulation, for each generation, we computed the creature with the best fitness up until that generation. The fitness function here is the distance the robot can move in the -x direction, the robot that moved the most in the -x direction had the best fitness. The 5 simulations started from a different random seed (1,2,3,4,5) to ensure replicability. 
 
-The results of the best fitness at each generation for each simulation is show below:
+For this experiment, I started with numLinks between 5 - 20, linkSize between 0.3 - 1 and a motorRange of 0.35.
 
+### Results
 
+The results of the best fitness at each generation for each simulation (Seed 1 - 5) is show below:
 
+<img width="651" alt="Screen Shot 2023-02-27 at 15 54 25" src="https://user-images.githubusercontent.com/63747047/221695172-d9ba5a15-604c-4450-9036-ec624ae6d681.png">
 
 ## Citation
 Inspiration for this project from Ludobots MOOC and Karl Sims! :)
