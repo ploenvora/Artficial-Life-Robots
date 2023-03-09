@@ -5,9 +5,8 @@ Generate a hypothesis and test it.
 Expectations: Identify and investigate an interesting detail of evolution, morphology or behavioral control. Formulate a hypothesis and design a control experiment that isolates and interrogates this detail.
 
 ## Defining my hypothesis
-<img width="800" alt="Screen Shot 2023-03-09 at 00 48 26" src="https://user-images.githubusercontent.com/63747047/223951108-83f5ae68-2534-4b75-91bf-fa4c763ea9c5.png">
+<img width="800" alt="Screen Shot 2023-03-09 at 01 29 07" src="https://user-images.githubusercontent.com/63747047/223951710-61052903-c208-4ee6-a891-c81941695255.png">
 <img width="800" alt="Screen Shot 2023-03-09 at 00 48 26" src="https://user-images.githubusercontent.com/63747047/223942807-c59549b0-6c31-49cf-92a6-595cec2cac28.png">
-
 ### Hypothesis: 
 Robots with hierarchical links, where the size of the parent link is consistently greater than that of the child link, have the ability to traverse greater distances compared to robots with links of cubic dimensions.
 
