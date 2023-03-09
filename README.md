@@ -1,4 +1,4 @@
-# Final Project
+# Final Project ʕ •ᴥ•ʔゝ☆ Science Option ʕ •ᴥ•ʔゝ☆
 
 Generate a hypothesis and test it.
 
