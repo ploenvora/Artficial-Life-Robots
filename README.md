@@ -5,11 +5,16 @@ Generate a hypothesis and test it.
 Expectations: Identify and investigate an interesting detail of evolution, morphology or behavioral control. Formulate a hypothesis and design a control experiment that isolates and interrogates this detail.
 
 ## Defining my hypothesis
-<img width="800" alt="Screen Shot 2023-03-09 at 00 48 12" src="https://user-images.githubusercontent.com/63747047/223942773-0e9c558a-6339-489d-974f-2918a048e210.png">
+<img width="800" alt="Screen Shot 2023-03-09 at 00 48 26" src="https://user-images.githubusercontent.com/63747047/223951108-83f5ae68-2534-4b75-91bf-fa4c763ea9c5.png">
 <img width="800" alt="Screen Shot 2023-03-09 at 00 48 26" src="https://user-images.githubusercontent.com/63747047/223942807-c59549b0-6c31-49cf-92a6-595cec2cac28.png">
 
 ### Hypothesis: 
 Robots with hierarchical links, where the size of the parent link is consistently greater than that of the child link, have the ability to traverse greater distances compared to robots with links of cubic dimensions.
+
+## Creating my variations
+
+### Groups
+Control Group (A) will have robots with cubic links. Experiment Group (B) will have robots with hierarchical links, where the size of the parent link is consistently greater than that of the child link.
 
 ## Group A: How bodies and brains are generated - Control (Cubic Links)
 
@@ -64,14 +69,11 @@ The minimum and maximum number of links and the minimum and maximum link sizes c
 
 10. You then have a creature with a randomized number of links, randomized link sizes, randomized positions, randomized joint rotations, randomized sensored links and randomized synapses! Yay!
 
-### Example diagram of body/brain generation
-The gif below shows a potential body/brain generation. It must be noted that although the link sizes here are integers (as links are constructed with cubes in the gif), the simulation link sizes can take on non-integer sizes. Blue links represent unsensored links and green represents sensored links. 
+## Sample Size
+I will create 25,000 simulations for each group. Each group will have 5 runs. Each run starts with a population size of 10 and evolve for 100 generations
 
-![ezgif com-crop](https://user-images.githubusercontent.com/63747047/221438685-99344543-7dd7-46a0-b1f7-5f54ff613c65.gif)
-
-## How bodies and brains are mutated
-
-For each mutation, there are 5 types of mutations it can undergo: 1) Remove a link, 2) Add a link, 3) Change a link's size (This is not applicable for the control group), 4) Change a link's sensor senses and 5) Change a joint's axis.
+## Mutation over generations
+Each child differs from it's parent due to mutation, there are 5 types of mutations it can undergo: 1) Remove a link, 2) Add a link, 3) Change a link's size (This is not applicable for the control group), 4) Change a link's sensor senses and 5) Change a joint's axis.
 
 1) Remove a link is simply removing a link that exists on the creature
 
@@ -91,8 +93,10 @@ For each mutation, there are 5 types of mutations it can undergo: 1) Remove a li
 
 5) Changing a joint's axis. There are 3 types of joint axis as mentioned above. Changing this just means changing the current axis to 1 out of the 2 other types of joint axis avaiable. It's difficult to create a diagram to show this but essentially, if its rotating in the x plane, it would be changed to rotate in the y or z plane, and so on.
 
-## How to Run 
+## Testing Metric (Fitness Function)
+The fitness function, which acts as an A/B testing metric, here is the distance the robot can move in the -x direction, the robot that moved the most in the -x direction had the best fitness.
 
+## Experimental Method (also use this when running during grading)
 For the control group, change sizeMin and sizeMax in constants.py to 1. Then, uncomment the first line of the Change_Size function in solution.py - this should uncomment out the "return" This ensures that our random seed for both groups generate the same robot with only one thing changed - size.
 
 For the experiment group, change sizeMin and sizeMax in the constants.py to 0.3 and 1, respectively. If the first line of the Change_Size function in solution.py is uncomment, comment this out.
@@ -100,17 +104,8 @@ For the experiment group, change sizeMin and sizeMax in the constants.py to 0.3 
 Generate 5 runs with 100 generations and 10 starting parent with your group of choice (control v.s. experiment) by running search.py/main.py! :)
 The number of generations and population size can be changed in constants.py.
 
-## Experiment
-5 simulations were generated with a population of 50 and 100 mutational genenerations. For each simulation, for each generation, we computed the creature with the best fitness up until that generation. The fitness function here is the distance the robot can move in the -x direction, the robot that moved the most in the -x direction had the best fitness. The 5 simulations started from a different random seed (1,2,3,4,5) to ensure replicability. 
+## Results
 
-For this experiment, I started with numLinks between 5 - 20, linkSize between 0.3 - 1 and a motorRange of 0.35.
 
-### Results
 
-The results of the best fitness at each generation for each simulation (Seed 1 - 5) is show below:
-
-<img width="651" alt="Screen Shot 2023-02-27 at 15 54 25" src="https://user-images.githubusercontent.com/63747047/221695172-d9ba5a15-604c-4450-9036-ec624ae6d681.png">
-
-## Citation
-Inspiration for this project from Ludobots MOOC and Karl Sims! :)
 
