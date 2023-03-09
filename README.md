@@ -5,8 +5,8 @@ Generate a hypothesis and test it.
 Expectations: Identify and investigate an interesting detail of evolution, morphology or behavioral control. Formulate a hypothesis and design a control experiment that isolates and interrogates this detail.
 
 ## Defining my hypothesis
-<img width="475" alt="Screen Shot 2023-03-09 at 00 48 12" src="https://user-images.githubusercontent.com/63747047/223942773-0e9c558a-6339-489d-974f-2918a048e210.png">
-<img width="471" alt="Screen Shot 2023-03-09 at 00 48 26" src="https://user-images.githubusercontent.com/63747047/223942807-c59549b0-6c31-49cf-92a6-595cec2cac28.png">
+<img width="600" alt="Screen Shot 2023-03-09 at 00 48 12" src="https://user-images.githubusercontent.com/63747047/223942773-0e9c558a-6339-489d-974f-2918a048e210.png">
+<img width="600" alt="Screen Shot 2023-03-09 at 00 48 26" src="https://user-images.githubusercontent.com/63747047/223942807-c59549b0-6c31-49cf-92a6-595cec2cac28.png">
 
 ## How bodies and brains are generated
 
