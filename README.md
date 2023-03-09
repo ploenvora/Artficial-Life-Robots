@@ -69,6 +69,9 @@ The minimum and maximum number of links and the minimum and maximum link sizes c
 
 10. You then have a creature with a randomized number of links, randomized link sizes, randomized positions, randomized joint rotations, randomized sensored links and randomized synapses! Yay!
 
+## Body and Brain Generation Diagram
+<img width="800" alt="Screen Shot 2023-03-09 at 16 10 45" src="https://user-images.githubusercontent.com/63747047/224172100-c86d05bf-bf3f-42c0-94a7-e1731ff2fd07.png">
+
 ## Sample Size
 I will create 25,000 simulations for each group. Each group will have 5 runs. Each run starts with a population size of 10 and evolve for 100 generations
 
@@ -96,7 +99,7 @@ Each child differs from it's parent due to mutation, there are 5 types of mutati
 ## Testing Metric (Fitness Function)
 The fitness function, which acts as an A/B testing metric, here is the distance the robot can move in the -x direction, the robot that moved the most in the -x direction had the best fitness.
 
-## Experimental Method (also use this when running during grading)
+## Experimental Method (also can be used for running during grading)
 For the control group, change sizeMin and sizeMax in constants.py to 1. Then, uncomment the first line of the Change_Size function in solution.py - this should uncomment out the "return" This ensures that our random seed for both groups generate the same robot with only one thing changed - size.
 
 For the experiment group, change sizeMin and sizeMax in the constants.py to 0.3 and 1, respectively. If the first line of the Change_Size function in solution.py is uncomment, comment this out.
