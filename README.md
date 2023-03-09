@@ -8,6 +8,8 @@ Expectations: Identify and investigate an interesting detail of evolution, morph
 <img width="800" alt="Screen Shot 2023-03-09 at 00 48 12" src="https://user-images.githubusercontent.com/63747047/223942773-0e9c558a-6339-489d-974f-2918a048e210.png">
 <img width="800" alt="Screen Shot 2023-03-09 at 00 48 26" src="https://user-images.githubusercontent.com/63747047/223942807-c59549b0-6c31-49cf-92a6-595cec2cac28.png">
 
+### Hypothesis: **Robots with hierarchical links, where the size of the parent link is consistently greater than that of the child link, have the ability to traverse greater distances compared to robots with links of cubic dimensions.**
+
 ## How bodies and brains are generated
 
 The minimum and maximum number of links and the minimum and maximum link sizes can be set in Create_Body(). For each creature generated, the number of links, numLinks, is randomized.
