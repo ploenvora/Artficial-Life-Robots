@@ -96,6 +96,9 @@ Each child differs from it's parent due to mutation, there are 5 types of mutati
 
 5) Changing a joint's axis. There are 3 types of joint axis as mentioned above. Changing this just means changing the current axis to 1 out of the 2 other types of joint axis avaiable. It's difficult to create a diagram to show this but essentially, if its rotating in the x plane, it would be changed to rotate in the y or z plane, and so on.
 
+### How mutations for Group A and B differ
+For group A, all links are sized (1, 1, 1) while for group B, all links are randomized between 0.3 - 1 with the exception that parent links must always be bigger than the child link. In terms of mutation, both groups will mutate in the same manner as we are using the same random seed for each group's 5 runs. The only difference is that when robots in Group A undergo the Change_Size mutation, nothing happens! :) 
+
 ## Testing Metric (Fitness Function)
 The fitness function, which acts as an A/B testing metric, here is the distance the robot can move in the -x direction, the robot that moved the most in the -x direction had the best fitness.
 
@@ -108,6 +111,8 @@ Generate 5 runs with 100 generations and 10 starting parent with your group of c
 The number of generations and population size can be changed in constants.py.
 
 ## Results
+
+## Discussion and Conclusion
 
 
 
