@@ -99,6 +99,9 @@ Each child differs from it's parent due to mutation, there are 5 types of mutati
 ### How mutations for Group A and B differ
 For group A, all links are sized (1, 1, 1) while for group B, all links are randomized between 0.3 - 1 with the exception that parent links must always be bigger than the child link. In terms of mutation, both groups will mutate in the same manner as we are using the same random seed for each group's 5 runs. The only difference is that when robots in Group A undergo the Change_Size mutation, nothing happens! :) 
 
+## Selection
+The selection process of best fitness robots is illustrated in the "Defining my hypothesis" section's diagram above. It essentially follows the parallel hill climber algorithm from the Ludobots MOOC. 
+
 ## Testing Metric (Fitness Function)
 The fitness function, which acts as an A/B testing metric, here is the distance the robot can move in the -x direction, the robot that moved the most in the -x direction had the best fitness.
 
