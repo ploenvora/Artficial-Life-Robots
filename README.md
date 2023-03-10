@@ -6,7 +6,7 @@ Expectations: Identify and investigate an interesting detail of evolution, morph
 
 ## Defining my hypothesis
 <img width="800" alt="Screen Shot 2023-03-09 at 01 29 07" src="https://user-images.githubusercontent.com/63747047/223951710-61052903-c208-4ee6-a891-c81941695255.png">
-<img width="800" alt="Screen Shot 2023-03-09 at 00 48 26" src="https://user-images.githubusercontent.com/63747047/223942807-c59549b0-6c31-49cf-92a6-595cec2cac28.png">
+<img width="800" alt="Screen Shot 2023-03-09 at 21 39 02" src="https://user-images.githubusercontent.com/63747047/224217512-07e3cdf2-9fdc-4df5-9380-d0b37bd6d493.png">
 
 ### Hypothesis: 
 Robots with hierarchical links, where the size of the parent link is consistently greater than that of the child link, have the ability to traverse greater distances compared to robots with links of cubic dimensions.
