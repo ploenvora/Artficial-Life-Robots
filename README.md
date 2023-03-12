@@ -132,12 +132,30 @@ We also noticed that robots evolved into 2 main types of successful robots:
 
 #### Hopping robots
 Hoppping robots typically have a sensored bottom link and travels by hopping.
+![ezgif com-video-to-gif (1)](https://user-images.githubusercontent.com/63747047/224517827-48fda37f-176f-4e34-8728-adadfc3627bb.gif)
 
 #### Gallopping robots
 Gallopping robots typically have two links (one or both sensored) and it gallops like a horse.
 ![ezgif com-video-to-gif](https://user-images.githubusercontent.com/63747047/224517792-caba1db6-3800-45a1-8c7c-36b7ab329daa.gif)
 
 ## Discussion and Conclusion
+Based on the fitness curve, it seems like the cubic robots (Group A) always outperformed the hierarchical robots (Group B) - therefore, we cannot accept our hypothesis. Additionally, it seems that from the get-go, even before mutation, cubic robots generally outperformed hierarchical robots. While these were the results I found, I believe that this could be due to limitations of the experiment. If I had more time to re-do this experiement again, I would definitely take the the limitations below into account.
+
+### Limitations
+1. Cubic robots were larger that hierarchical robots.
+Because cubic robot links had a size of 1 and hierarchical robots were between 0.3 - 1, it was impossible for hierarchical robots to be larger than cubic robots. This could be a reason why it seemed like the jumping strength of the cubic robots were larger than the hierarchical robots.
+
+2. Distance is measured by the distance travelled in one direction (x-direction).
+This could've led to producing robots that were only good at travelling in one direction - which is not exactly what the hypothesis was. I would calculate the euclidean distance from the origin instead if I were to repeat this experiement.
+
+3. Run the experiment with a higher number of generations.
+It seems that the hierarchical robots could still evolve further since the jumps between each best parent (as seen on the fitness curve) was small but more frequent than cubic robots. Perhaps running the simulation for more generations would allow the hierarchical robots to evolve to become better and better robots, and maybe even better than cubical ones.
+
+## 2-min Summary Video
+https://www.youtube.com/watch?v=abPm0RiE7oA&ab_channel=nerdymccurdian
+
+## Citation
+Inspiration for this project from Ludobots MOOC and Karl Sims! :)
 
 
 
