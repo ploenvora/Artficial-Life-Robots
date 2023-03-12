@@ -115,6 +115,28 @@ The number of generations and population size can be changed in constants.py.
 
 ## Results
 
+### Best Fitness Curve
+The best fitness curve at each generation for Group A and Group B are shown below:
+![Screen Shot 2023-03-11 at 17 58 27](https://user-images.githubusercontent.com/63747047/224516865-42d7db69-56da-4c93-a963-803e7243de03.png)
+
+We can see that cubic robots consistently outperformed hierarchical robots in every run. This contradicts our hypothesis.
+
+### Evolution
+When tracking to see how many times in each run, a robot mutates to find a better performing robot, we get these results:
+![Screen Shot 2023-03-11 at 18 01 58](https://user-images.githubusercontent.com/63747047/224516963-4c50a96f-ef1f-4fb3-a6a0-bf29125e483a.png)
+
+It's interesting to note here that Group B, on average, had more succesful mutations that Group A.
+
+### Types of Successful Robots
+We also noticed that robots evolved into 2 main types of successful robots:
+
+#### Hopping robots
+Hoppping robots typically have a sensored bottom link and travels by hopping.
+
+#### Gallopping robots
+Gallopping robots typically have two links (one or both sensored) and it gallops like a horse.
+![ezgif com-video-to-gif](https://user-images.githubusercontent.com/63747047/224517792-caba1db6-3800-45a1-8c7c-36b7ab329daa.gif)
+
 ## Discussion and Conclusion
 
 
