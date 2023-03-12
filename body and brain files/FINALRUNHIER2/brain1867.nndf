@@ -1,0 +1,26 @@
+<neuralNetwork>
+    <neuron name = "0" type = "sensor" linkName = "Link1" />
+    <neuron name = "1" type = "sensor" linkName = "Link2" />
+    <neuron name = "2" type = "sensor" linkName = "Link3" />
+    <neuron name = "3" type = "sensor" linkName = "Link4" />
+    <neuron name = "4" type = "motor"  jointName = "Link0_Link1" />
+    <neuron name = "5" type = "motor"  jointName = "Link1_Link2" />
+    <neuron name = "6" type = "motor"  jointName = "Link2_Link3" />
+    <neuron name = "7" type = "motor"  jointName = "Link0_Link4" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "4" weight = "0.8751986724587884" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "5" weight = "0.6217877675593504" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "6" weight = "-0.01670532640889255" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "7" weight = "-0.4623192044595197" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "4" weight = "-0.6956440799862211" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "5" weight = "-0.025854492588750055" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "6" weight = "0.3441906158084478" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "7" weight = "-0.5182088967669698" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "4" weight = "0.27024462545832484" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "5" weight = "-0.2540504285056482" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "6" weight = "0.821840029374697" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "7" weight = "0.9011911449943657" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "4" weight = "-0.7395683758192348" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "5" weight = "0.9837037774406541" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "6" weight = "0.29841024709596464" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "7" weight = "0.7821446049102696" />
+</neuralNetwork>

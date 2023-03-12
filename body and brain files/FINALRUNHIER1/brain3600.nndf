@@ -1,0 +1,26 @@
+<neuralNetwork>
+    <neuron name = "0" type = "sensor" linkName = "Link0" />
+    <neuron name = "1" type = "sensor" linkName = "Link1" />
+    <neuron name = "2" type = "sensor" linkName = "Link2" />
+    <neuron name = "3" type = "sensor" linkName = "Link3" />
+    <neuron name = "4" type = "motor"  jointName = "Link0_Link1" />
+    <neuron name = "5" type = "motor"  jointName = "Link0_Link2" />
+    <neuron name = "6" type = "motor"  jointName = "Link2_Link3" />
+    <neuron name = "7" type = "motor"  jointName = "Link1_Link4" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "4" weight = "-0.2754625727955089" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "5" weight = "-0.1949005426925754" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "6" weight = "0.4360980179277434" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "7" weight = "0.7049293639656609" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "4" weight = "-0.6280797683589947" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "5" weight = "0.3937518547465426" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "6" weight = "-0.5141865355174164" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "7" weight = "-0.6648706575486121" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "4" weight = "0.8241239210626115" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "5" weight = "-0.6629359979108962" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "6" weight = "0.3960824875364777" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "7" weight = "0.6093333244834869" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "4" weight = "-0.29319927077006125" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "5" weight = "-0.08091993680125809" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "6" weight = "-0.7521978478739901" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "7" weight = "-0.7180380553320214" />
+</neuralNetwork>

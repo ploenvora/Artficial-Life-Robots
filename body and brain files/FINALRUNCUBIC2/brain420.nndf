@@ -1,0 +1,26 @@
+<neuralNetwork>
+    <neuron name = "0" type = "sensor" linkName = "Link0" />
+    <neuron name = "1" type = "sensor" linkName = "Link1" />
+    <neuron name = "2" type = "sensor" linkName = "Link3" />
+    <neuron name = "3" type = "sensor" linkName = "Link4" />
+    <neuron name = "4" type = "motor"  jointName = "Link0_Link1" />
+    <neuron name = "5" type = "motor"  jointName = "Link0_Link2" />
+    <neuron name = "6" type = "motor"  jointName = "Link2_Link3" />
+    <neuron name = "7" type = "motor"  jointName = "Link3_Link4" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "4" weight = "-0.5944435165987441" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "5" weight = "-0.44679813738880236" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "6" weight = "-0.905446551908615" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "7" weight = "-0.8025895622630455" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "4" weight = "-0.9721355275537396" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "5" weight = "-0.15972703947762468" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "6" weight = "-0.6789132613207103" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "7" weight = "0.1864962109131998" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "4" weight = "0.9948327447001686" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "5" weight = "-0.3287226461159243" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "6" weight = "-0.2150486966355596" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "7" weight = "-0.05181192527015077" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "4" weight = "0.32471114960459047" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "5" weight = "0.09934888079918491" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "6" weight = "-0.9977939665639941" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "7" weight = "0.20534968020388145" />
+</neuralNetwork>

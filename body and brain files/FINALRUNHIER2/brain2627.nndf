@@ -1,0 +1,26 @@
+<neuralNetwork>
+    <neuron name = "0" type = "sensor" linkName = "Link1" />
+    <neuron name = "1" type = "sensor" linkName = "Link2" />
+    <neuron name = "2" type = "sensor" linkName = "Link3" />
+    <neuron name = "3" type = "sensor" linkName = "Link4" />
+    <neuron name = "4" type = "motor"  jointName = "Link0_Link1" />
+    <neuron name = "5" type = "motor"  jointName = "Link1_Link2" />
+    <neuron name = "6" type = "motor"  jointName = "Link2_Link3" />
+    <neuron name = "7" type = "motor"  jointName = "Link0_Link4" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "4" weight = "0.5341671219655326" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "5" weight = "0.2176276969242248" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "6" weight = "-0.05987767549663747" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "7" weight = "0.06331421455316022" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "4" weight = "0.23653260721743807" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "5" weight = "0.05463611781159683" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "6" weight = "0.33268498250999534" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "7" weight = "0.19736748348268174" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "4" weight = "0.7801425244718354" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "5" weight = "0.33603737150585755" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "6" weight = "0.15428830855253262" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "7" weight = "-0.31208126973603845" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "4" weight = "0.24514842347221988" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "5" weight = "-0.6778303792288822" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "6" weight = "0.8279918585943611" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "7" weight = "0.5693143192804082" />
+</neuralNetwork>

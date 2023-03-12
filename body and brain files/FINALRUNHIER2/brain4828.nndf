@@ -1,0 +1,16 @@
+<neuralNetwork>
+    <neuron name = "0" type = "sensor" linkName = "Link1" />
+    <neuron name = "1" type = "sensor" linkName = "Link2" />
+    <neuron name = "2" type = "motor"  jointName = "Link0_Link1" />
+    <neuron name = "3" type = "motor"  jointName = "Link1_Link2" />
+    <neuron name = "4" type = "motor"  jointName = "Link2_Link3" />
+    <neuron name = "5" type = "motor"  jointName = "Link3_Link4" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "2" weight = "-0.7048192689456092" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "3" weight = "-0.6848907529794095" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "4" weight = "-0.7095332896990114" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "5" weight = "-0.19845533094499235" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "2" weight = "-0.6905542130048548" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "3" weight = "0.06819193648982069" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "4" weight = "0.8703393499650212" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "5" weight = "-0.4305496490085088" />
+</neuralNetwork>

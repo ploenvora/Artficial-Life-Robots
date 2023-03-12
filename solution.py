@@ -4,6 +4,7 @@ import os
 import random as random
 import time
 import constants as c
+import copy
 
 height = 1
 width = 1
@@ -21,12 +22,15 @@ class SOLUTION:
         self.jointaxis = jointaxis
         self.weights = []
         self.counter = counter
+        self.links_cubic = []
+        self.joints_cubic = []
 
     def Start_Simulation(self, directOrGUI):
         self.Create_World()
         self.Initialize_Body()
         self.Send_Brain()
-        self.Run_Simulation(directOrGUI)
+        fitness = self.Run_Simulation(directOrGUI)
+        return fitness
 
     def Wait_For_Simulation_To_End(self, directOrGUI):
         fileName = "fitness" + str(self.myID) + ".txt"
@@ -34,13 +38,14 @@ class SOLUTION:
             time.sleep(0.01)
         f = open(fileName, "r")
         self.fitness = float(f.read())
-        # print("\n\nfitness:", self.fitness, fileName)
         f.close()
         os.system("rm " + fileName)
+        return self.fitness
 
     def Run_Simulation(self, directOrGUI):
         os.system(f"python3.9 simulate.py {directOrGUI} {str(self.myID)} &")
-        self.Wait_For_Simulation_To_End(directOrGUI)
+        fitness = self.Wait_For_Simulation_To_End(directOrGUI)
+        return fitness
 
     def Create_World(self):
         #Tells pyrosim the name of the file where information about the world you're about to create 
@@ -53,21 +58,20 @@ class SOLUTION:
 
     def Initialize_Body(self):
         pyrosim.Start_URDF(f"body{self.myID}.nndf")
-        # print("\n\n\n\n start urdf")
 
         #Find the number of initial links
         numLinks = random.randint(c.linksMin, c.linksMax)
 
         #Create the starting link
-        width = random.uniform(c.sizeMin, c.sizeMax)
-        length = random.uniform(c.sizeMin, c.sizeMax)
-        height = random.uniform(c.sizeMin, c.sizeMax)
+        width = 1 #random.uniform(c.sizeMin, c.sizeMax)
+        length = 1 #random.uniform(c.sizeMin, c.sizeMax)
+        height = 1 #random.uniform(c.sizeMin, c.sizeMax)
 
         #Store the first link in self.links
         self.links = [self.Link("Link0", (width, length, height), faces_chosen=[])]
         #Set the absolute position and relative position of the first link
-        self.links[0].position = (0, 0, 2)
-        self.links[0].relative = (0, 0, 2)
+        self.links[0].position = (0, 0, 3)
+        self.links[0].relative = (0, 0, 3)
 
         #Reinitialize everything!
         self.sensors = []
@@ -83,10 +87,6 @@ class SOLUTION:
 
         #Generate links and joints to complete the structure
         while len(self.links) != numLinks:
-            # print("\n\n\n\n running add link")
-            # print("Links:")
-            # for link in self.links:
-            #     print(link)
             self.Add_Link()
 
         #Function that puts everything in pyrosim
@@ -95,13 +95,14 @@ class SOLUTION:
         pyrosim.End()
 
     def Add_Link(self):
-        #Set link vars
-        width = random.uniform(c.sizeMin, c.sizeMax)
-        length = random.uniform(c.sizeMin, c.sizeMax)
-        height = random.uniform(c.sizeMin, c.sizeMax)
-
         #Find a random link to connect it to 
         parentLink = random.choice(self.links)
+
+        #Set link vars
+        width = random.uniform(c.sizeMin, parentLink.size[0])
+        length = random.uniform(c.sizeMin, parentLink.size[1])
+        height = random.uniform(c.sizeMin, parentLink.size[2])
+
         px, py, pz = parentLink.position[0], parentLink.position[1],parentLink.position[2]
         pw, pl, ph = parentLink.size[0], parentLink.size[1], parentLink.size[2]
 
@@ -203,9 +204,8 @@ class SOLUTION:
         choice1 = random.choice(["add", "remove", "change"])
 
         #If there is only one link left, you cannot remove
-        if len(self.links) == 1:
-            choice1 = random.choice(["add", "change"])        
-        # print("\n\n\n\nTHIS IS THE CHOICE 1:", choice1)
+        if len(self.links) <= 2:
+            choice1 = random.choice(["add", "change"])
 
         if choice1 == 'add':
             self.Add_Link()
@@ -213,7 +213,6 @@ class SOLUTION:
             self.Remove_Link()
         else:
             choice2 = random.choice(["type", "size"])
-            # print("\n\n\n\nTHIS IS THE CHOICE 2:", choice2)
             if choice2 == "type":
                 self.Change_Type()
             else:
@@ -228,7 +227,13 @@ class SOLUTION:
         self.Send_Brain()
 
         #Start the baby's simulation
-        self.Run_Simulation("DIRECT")
+        fitness = self.Run_Simulation("DIRECT")
+        return fitness
+        # for link in self.links:
+        #     print(link.position, link.relative)
+
+        # for joint in self.joints:
+        #     print(joint.position, joint.relative)
 
     def Change_Type(self):
         #Choose if we are changing link or joint
@@ -245,6 +250,10 @@ class SOLUTION:
             self.jointaxis[changedJoint] = random.choice(leftoverAxes)
 
     def Change_Size(self):
+
+        #If we are in cubic world just make Change_Size(return) :)
+        return
+    
         #Choose a random link, make sure that the link is connected to one thing
         intersects = True
         while intersects:
@@ -255,10 +264,17 @@ class SOLUTION:
                 if len(self.links[changeLink].faces_chosen) == 1 and changeLink != 0:
                     found = True
             
+            parentLink = self.links[changeLink].parent
+
             #Set link vars
-            width = random.uniform(c.sizeMin, c.sizeMax)
-            length = random.uniform(c.sizeMin, c.sizeMax)
-            height = random.uniform(c.sizeMin, c.sizeMax)
+            width = random.uniform(c.sizeMin, parentLink.size[0])
+            length = random.uniform(c.sizeMin, parentLink.size[1])
+            height = random.uniform(c.sizeMin, parentLink.size[2])
+
+            # #Set link vars
+            # width = random.uniform(c.sizeMin, c.sizeMax)
+            # length = random.uniform(c.sizeMin, c.sizeMax)
+            # height = random.uniform(c.sizeMin, c.sizeMax)
 
             #Change the size of the links
             self.links[changeLink].size = (width, length, height)
@@ -295,12 +311,12 @@ class SOLUTION:
                 found = True
                 self.counter -= 1
 
-        # print("Links:")
-        # for link in self.links:
-        #     print(link)
-        # print("Joints:")
-        # for joint in self.joints:
-        #     print(joint)
+        #Remove it from the faces chosen of the parent joint
+        for link in self.links:
+            for joint in self.joints:
+                if joint.child == self.links[delLink].name:
+                    if joint.parent == link.name:
+                        link.faces_chosen.pop(-1)
 
         #Delete that link from self.links and self.joints
         for idx, joint in enumerate(self.joints):
@@ -324,13 +340,6 @@ class SOLUTION:
                     joint.child = f"{newName}"
                     joint.name = f"{joint.parent}_{newName}"
         
-        # print("Links:")
-        # for link in self.links:
-        #     print(link)
-        # print("Joints:")
-        # for joint in self.joints:
-        #     print(joint)
-
     def Set_ID(self, ID):
         self.myID = ID
 
@@ -344,8 +353,8 @@ class SOLUTION:
             self.faces_chosen = faces_chosen
             self.parent = parent
         
-        def __str__(self):
-            return "{}: position={}, relative={}, size={} \n".format(self.name, self.position, self.relative, self.size)
+        # def __str__(self):
+        #     return "{}: position={}, relative={}, size={} \n".format(self.name, self.position, self.relative, self.size)
         
         def intersects(self, other_link):
             dx = abs(self.position[0] - other_link.position[0])

@@ -1,0 +1,26 @@
+<neuralNetwork>
+    <neuron name = "0" type = "sensor" linkName = "Link0" />
+    <neuron name = "1" type = "sensor" linkName = "Link1" />
+    <neuron name = "2" type = "sensor" linkName = "Link3" />
+    <neuron name = "3" type = "sensor" linkName = "Link4" />
+    <neuron name = "4" type = "motor"  jointName = "Link0_Link1" />
+    <neuron name = "5" type = "motor"  jointName = "Link1_Link2" />
+    <neuron name = "6" type = "motor"  jointName = "Link1_Link3" />
+    <neuron name = "7" type = "motor"  jointName = "Link3_Link4" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "4" weight = "-0.6642538464459289" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "5" weight = "0.506443105502902" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "6" weight = "-0.16421073893802252" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "7" weight = "0.34695005871506335" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "4" weight = "-0.2063848874542169" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "5" weight = "-0.8856977965932677" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "6" weight = "0.6420356438283892" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "7" weight = "-0.6651997959125806" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "4" weight = "-0.7295918029234256" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "5" weight = "-0.2682246133186357" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "6" weight = "0.5989145344273237" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "7" weight = "0.8503483753052772" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "4" weight = "-0.47317094405184457" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "5" weight = "0.5848267166972432" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "6" weight = "0.752420570966126" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "7" weight = "-0.26037840535111845" />
+</neuralNetwork>

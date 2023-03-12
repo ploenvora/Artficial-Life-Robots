@@ -1,0 +1,31 @@
+<neuralNetwork>
+    <neuron name = "0" type = "sensor" linkName = "Link0" />
+    <neuron name = "1" type = "sensor" linkName = "Link1" />
+    <neuron name = "2" type = "sensor" linkName = "Link3" />
+    <neuron name = "3" type = "sensor" linkName = "Link4" />
+    <neuron name = "4" type = "motor"  jointName = "Link0_Link1" />
+    <neuron name = "5" type = "motor"  jointName = "Link1_Link2" />
+    <neuron name = "6" type = "motor"  jointName = "Link2_Link3" />
+    <neuron name = "7" type = "motor"  jointName = "Link0_Link4" />
+    <neuron name = "8" type = "motor"  jointName = "Link2_Link5" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "4" weight = "-0.6740897317122585" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "5" weight = "-0.3061949689042107" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "6" weight = "0.3578547798626621" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "7" weight = "0.742365201546805" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "8" weight = "-0.3051641643790519" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "4" weight = "-0.7289108644785005" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "5" weight = "-0.016802486918721327" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "6" weight = "-0.29534830324355044" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "7" weight = "-0.08224997778691523" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "8" weight = "0.5316306904295947" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "4" weight = "0.11512038764545562" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "5" weight = "0.7973325896383936" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "6" weight = "-0.11644028187174138" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "7" weight = "0.8448744359971014" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "8" weight = "0.24599579548654926" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "4" weight = "-0.2636732771051522" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "5" weight = "-0.24792492237603558" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "6" weight = "0.49252447583738523" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "7" weight = "-0.8877200234153613" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "8" weight = "-0.32022971129748123" />
+</neuralNetwork>

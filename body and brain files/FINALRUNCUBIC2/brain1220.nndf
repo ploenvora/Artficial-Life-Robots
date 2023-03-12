@@ -1,0 +1,26 @@
+<neuralNetwork>
+    <neuron name = "0" type = "sensor" linkName = "Link0" />
+    <neuron name = "1" type = "sensor" linkName = "Link2" />
+    <neuron name = "2" type = "sensor" linkName = "Link3" />
+    <neuron name = "3" type = "sensor" linkName = "Link4" />
+    <neuron name = "4" type = "motor"  jointName = "Link0_Link1" />
+    <neuron name = "5" type = "motor"  jointName = "Link0_Link2" />
+    <neuron name = "6" type = "motor"  jointName = "Link2_Link3" />
+    <neuron name = "7" type = "motor"  jointName = "Link3_Link4" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "4" weight = "-0.6564391560264249" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "5" weight = "-0.0061845006554785975" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "6" weight = "-0.4446977120287545" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "7" weight = "0.790800067173894" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "4" weight = "0.6989778750012667" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "5" weight = "0.5681280467622865" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "6" weight = "-0.3723258352168697" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "7" weight = "-0.1269761765614308" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "4" weight = "0.07408364549091351" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "5" weight = "-0.5519076827395508" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "6" weight = "-0.38233073274674867" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "7" weight = "-0.4227922145928076" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "4" weight = "-0.34676548825571096" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "5" weight = "0.40732918287655684" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "6" weight = "0.38864924818062074" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "7" weight = "0.05773059847253048" />
+</neuralNetwork>

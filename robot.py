@@ -9,7 +9,7 @@ from sensor import SENSOR
 from motor import MOTOR
 from pyrosim.neuralNetwork import NEURAL_NETWORK
 import os
-
+import csv
 
 class ROBOT:
     def __init__(self, solutionID):
@@ -21,6 +21,7 @@ class ROBOT:
         self.Prepare_To_Sense()
         self.Prepare_To_Act()
         self.nn = NEURAL_NETWORK(f"brain{solutionID}.nndf")
+        self.results = []
         #os.system(f"rm body{solutionID}.nndf")
         #os.system(f"rm brain{solutionID}.nndf")
 
@@ -37,7 +38,6 @@ class ROBOT:
         self.motors = {}
         for jointName in pyrosim.jointNamesToIndices:
             self.motors[jointName] = MOTOR(jointName)
-        #print(self.motors)
 
     def Act(self, t):
         for neuronName in self.nn.Get_Neuron_Names():
@@ -57,7 +57,11 @@ class ROBOT:
         with open(f"tmp{str(myID)}.txt", "w") as file:
             file.write(str(xCoordinateOfLinkZero))
         file.close()
-        os.system(f"mv 'tmp{myID}.txt' 'fitness{myID}.txt'")           
+        os.system(f"mv 'tmp{myID}.txt' 'fitness{myID}.txt'") 
+        # self.results.append((myID, xCoordinateOfLinkZero))
+        # with open(f"total_fitness_results.csv", mode="w", newline="") as f:
+        #     writer = csv.writer(f)
+        #     writer.writerows(self.results)
 
 
 

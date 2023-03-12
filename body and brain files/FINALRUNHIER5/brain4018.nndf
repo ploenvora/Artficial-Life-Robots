@@ -1,0 +1,26 @@
+<neuralNetwork>
+    <neuron name = "0" type = "sensor" linkName = "Link0" />
+    <neuron name = "1" type = "sensor" linkName = "Link1" />
+    <neuron name = "2" type = "sensor" linkName = "Link3" />
+    <neuron name = "3" type = "sensor" linkName = "Link4" />
+    <neuron name = "4" type = "motor"  jointName = "Link0_Link1" />
+    <neuron name = "5" type = "motor"  jointName = "Link1_Link2" />
+    <neuron name = "6" type = "motor"  jointName = "Link1_Link3" />
+    <neuron name = "7" type = "motor"  jointName = "Link1_Link4" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "4" weight = "0.03099540216368135" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "5" weight = "0.6203298367418475" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "6" weight = "-0.3551337069361862" />
+    <synapse sourceNeuronName = "0" targetNeuronName = "7" weight = "0.8688103819800794" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "4" weight = "0.4596126042320474" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "5" weight = "-0.6067027102228653" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "6" weight = "-0.2090637626060896" />
+    <synapse sourceNeuronName = "1" targetNeuronName = "7" weight = "0.09363357758292312" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "4" weight = "-0.5331378988865751" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "5" weight = "-0.39884523102296265" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "6" weight = "-0.16310289635737862" />
+    <synapse sourceNeuronName = "2" targetNeuronName = "7" weight = "-0.23931336499498213" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "4" weight = "-0.06755527305949793" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "5" weight = "0.2590404196335232" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "6" weight = "0.16878022605708742" />
+    <synapse sourceNeuronName = "3" targetNeuronName = "7" weight = "-0.4460298797859148" />
+</neuralNetwork>
