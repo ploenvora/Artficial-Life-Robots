@@ -108,13 +108,16 @@ The selection process of best fitness robots is illustrated in the "Defining my 
 ## Testing Metric (Fitness Function)
 The fitness function, which acts as an A/B testing metric, here is the distance the robot can move in the -x direction, the robot that moved the most in the -x direction had the best fitness.
 
-## Experimental Method (also can be used for running during grading)
+## Experimental Method
 For the control group, change sizeMin and sizeMax in constants.py to 1. Then, uncomment the first line of the Change_Size function in solution.py - this should uncomment out the "return" This ensures that our random seed for both groups generate the same robot with only one thing changed - size.
 
 For the experiment group, change sizeMin and sizeMax in the constants.py to 0.3 and 1, respectively. If the first line of the Change_Size function in solution.py is uncomment, comment this out.
 
 Generate 5 runs with 100 generations and 10 starting parent with your group of choice (control v.s. experiment) by running search.py! :)
 The number of generations and population size can be changed in constants.py.
+
+### How To Run For Grading
+The number of generation and population size has been set to 1. To run, just run search.py and it should work!
 
 ## Results
 
