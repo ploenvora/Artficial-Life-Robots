@@ -4,6 +4,9 @@ Generate a hypothesis and test it.
 
 Expectations: Identify and investigate an interesting detail of evolution, morphology or behavioral control. Formulate a hypothesis and design a control experiment that isolates and interrogates this detail.
 
+## Teaser Gif
+![ezgif com-video-to-gif (2)](https://user-images.githubusercontent.com/63747047/224520658-37169a9a-33f6-4f67-a54a-71eae8886312.gif)
+
 ## Defining my hypothesis
 <img width="800" alt="Screen Shot 2023-03-09 at 01 29 07" src="https://user-images.githubusercontent.com/63747047/223951710-61052903-c208-4ee6-a891-c81941695255.png">
 <img width="800" alt="Screen Shot 2023-03-09 at 21 39 02" src="https://user-images.githubusercontent.com/63747047/224217512-07e3cdf2-9fdc-4df5-9380-d0b37bd6d493.png">
@@ -110,7 +113,7 @@ For the control group, change sizeMin and sizeMax in constants.py to 1. Then, un
 
 For the experiment group, change sizeMin and sizeMax in the constants.py to 0.3 and 1, respectively. If the first line of the Change_Size function in solution.py is uncomment, comment this out.
 
-Generate 5 runs with 100 generations and 10 starting parent with your group of choice (control v.s. experiment) by running search.py/main.py! :)
+Generate 5 runs with 100 generations and 10 starting parent with your group of choice (control v.s. experiment) by running search.py! :)
 The number of generations and population size can be changed in constants.py.
 
 ## Results
